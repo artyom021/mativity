@@ -1,0 +1,28 @@
+import { Lang } from "@/types/lang";
+
+export default <Lang>{
+  campaignCreated: "Campaign successfully created",
+  campaignUpdated: "Campaign successfully updated",
+  deleteMediaProperty: "Media Property was deleted successfully",
+  linkOccasion: "Occasion was successfully linked",
+  linkedOccasionUpdated: "Occasion was successfully updated",
+  occasionSaved: "Occasion has been saved",
+  pushStartedOccasions: "Occasion push has been started",
+  pushedOccasions: "Occasion was successfully pushed",
+  recallFinished: "Occasion recall has been finished",
+  saveSection: "Section was saved successfully",
+  savedOccasionDeleted: "Selected occasions have been deleted",
+  sectionCreated: "Section successfully created",
+  sectionUpdated: "Section successfully updated",
+  sectionDeleted: "Section successfully deleted",
+  setDefaultOccasion: "Default occasion was changed",
+  unlinkOccasion: "Occasion was successfully unlinked",
+  recallStarted: "Occasion recall has been started",
+  strategyCreated: "Strategy created successfully",
+  strategyUpdated: "Strategy updated successfully",
+  strategyDeleted: "Strategy deleted successfully",
+  occasionsSetCreated: "Occasions set created successfully",
+  occasionsSetUpdated: "Occasions set updated successfully",
+  occasionsSetOccasionDeleted: "Occasion was deleted from Occasion Set successfully",
+  updateOccasionInstanceInOccasionSet: "Occasion instance has been updated",
+};
