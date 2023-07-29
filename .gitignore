@@ -1,2 +1,9 @@
 node_modules
 *.env
+.env.example
+.idea/inspectionProfiles/Project_Default.xml
+.idea/jsLinters/eslint.xml
+src/.DS_Store
+.env.example
+.DS_Store
+.env.example

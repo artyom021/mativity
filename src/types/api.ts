@@ -1,4 +1,3 @@
-
 export enum RequestMode {
   Synchronous = "synchronous",
   Asynchronous = "asynchronous",

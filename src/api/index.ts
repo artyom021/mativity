@@ -2,7 +2,6 @@ import axios, { AxiosHeaders } from "axios";
 import { stringify } from "qs";
 import { Ref, ref } from "vue";
 
-
 export interface QueryParams {
   [key: string]: unknown;
 }
@@ -25,7 +24,6 @@ export interface Config {
 
 export const API_BASE_ROUTE: string = process.env.VUE_APP_API_URL || "";
 
-
 export function useApi(config: Config) {
   const data = ref();
   const response = ref({}) as Ref<ResponseType>;
@@ -33,18 +31,15 @@ export function useApi(config: Config) {
   const checkToken = async (token: string | null): Promise<void> => {
     if (!token) {
       try {
-      } catch (e) {
-      }
+      } catch (e) {}
 
       return;
     }
-
-
   };
 
   const request = async () => {
     const method = (config.method || "get").toLowerCase();
-    const apiToken = "asdasd"
+    const apiToken = "asdasd";
     await checkToken(apiToken);
 
     const headers = {
@@ -119,7 +114,6 @@ export function useApi(config: Config) {
             },
             headers,
           });
-
       }
 
       data.value = response.value?.data || {};
