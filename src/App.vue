@@ -19,6 +19,9 @@ import PageHeader from "@/components/PageHeader.vue";
 
 <style lang="scss">
 @import "@/scss/colorVariables.scss";
+@import "@/scss/reset.scss";
+@import "@/scss/sora.scss";
+@import "@/scss/bounce.scss";
 
 body {
   background-color: $app-background;

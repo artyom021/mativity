@@ -1,7 +1,10 @@
 import { RouteRecordRaw } from "vue-router";
 
 import { ROUTES } from "@/constants/routes";
+import AudioService from "@/views/AudioService.vue";
 import HomePage from "@/views/HomePage.vue";
+import ImageService from "@/views/ImageService.vue";
+import TextService from "@/views/TextService.vue";
 
 export const FOOTER_LINKS = [
   {
@@ -42,5 +45,23 @@ export const routes: Array<RouteRecordRaw> = [
     path: ROUTES.ROOT.PATH,
     name: ROUTES.ROOT.NAME,
     component: HomePage,
+  },
+
+  {
+    path: ROUTES.TEXT_SERVICE.PATH,
+    name: ROUTES.TEXT_SERVICE.NAME,
+    component: TextService,
+  },
+
+  {
+    path: ROUTES.AUDIO_SERVICE.PATH,
+    name: ROUTES.AUDIO_SERVICE.NAME,
+    component: AudioService,
+  },
+
+  {
+    path: ROUTES.IMAGE_SERVICE.PATH,
+    name: ROUTES.IMAGE_SERVICE.NAME,
+    component: ImageService,
   },
 ];

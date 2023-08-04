@@ -15,7 +15,7 @@ export const ROUTES: RoutesType = {
 
   ROOT: {
     PATH: "/",
-    NAME: "root",
+    NAME: "home",
   },
 
   NOT_FOUND: {
@@ -24,7 +24,7 @@ export const ROUTES: RoutesType = {
   },
 
   PRIVACY_POLICY: {
-    PATH: "/privcacy-policy",
+    PATH: "/privacy-policy",
     NAME: "privacyPolicy",
   },
 
@@ -40,16 +40,16 @@ export const ROUTES: RoutesType = {
 
   TEXT_SERVICE: {
     PATH: "/text-service",
-    NAME: "textService",
+    NAME: "text",
   },
 
   IMAGE_SERVICE: {
     PATH: "/image-service",
-    NAME: "imageService",
+    NAME: "image",
   },
 
   AUDIO_SERVICE: {
-    PATH: "/image-service",
-    NAME: "imageService",
+    PATH: "/audio-service",
+    NAME: "audio",
   },
 };

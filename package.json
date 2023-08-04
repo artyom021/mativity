@@ -1,6 +1,6 @@
 {
-  "name": "wpp",
-  "version": "2.7.9",
+  "name": "mativity",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -15,12 +15,14 @@
   },
   "dependencies": {
     "axios": "^1.2.2",
+    "click-outside-vue3": "^4.0.1",
     "core-js": "^3.8.3",
     "date-fns": "^2.29.3",
     "lodash": "^4.17.21",
     "pinia": "^2.0.29",
     "primevue": "^3.31.0",
     "qs": "^6.11.0",
+    "unoverlay-vue": "^0.3.0",
     "vue": "^3.2.47",
     "vue-router": "^4.0.3"
   },

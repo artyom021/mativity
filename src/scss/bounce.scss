@@ -1,0 +1,73 @@
+.bounce-enter-active {
+  animation: bounce-in 1s;
+}
+
+.bounce-leave-active {
+  animation: bounce-out 2s;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateY(-300px);
+  }
+
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes bounce-out {
+  0% {
+    transform: translateY(0);
+  }
+
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(-411px);
+  }
+}
+
+.bounce-popup-enter-active {
+  animation: bounce-in 1s;
+}
+
+.bounce-popup-leave-active {
+  animation: bounce-out 2s;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateY(-300px);
+  }
+
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes bounce-out {
+  0% {
+    transform: translateY(0);
+  }
+
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(-811px);
+  }
+}
