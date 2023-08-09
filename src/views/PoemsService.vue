@@ -15,7 +15,7 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <div class="poems__input-value">Fable</div>
+      <div @click="isShowPopup = !isShowPopup" class="poems__input-value style">{{ selectedStyle.title }}</div>
     </div>
 
     <div class="poems__input">
@@ -39,6 +39,7 @@
     </div>
 
     <div class="poems__generate-btn">Generate</div>
+    <StylePopup :visible="isShowPopup" @on-change-show-popup="onPopupHide" />
   </div>
 </template>
 
@@ -46,6 +47,23 @@
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
 import InputText from "primevue/inputtext";
+import { ref } from "vue";
+
+import StylePopup from "@/components/popup/StylePopup.vue";
+export interface Style {
+  title: string;
+  value: string;
+}
+
+const selectedStyle = ref<Style>({ title: "Fable", value: "fable" });
+const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
+  isShowPopup.value = val.isShowPopup;
+  if (val.style) {
+    selectedStyle.value = val.style;
+  }
+};
+
+const isShowPopup = ref<boolean>(false);
 </script>
 
 <style lang="scss" scoped>
@@ -111,6 +129,10 @@ import InputText from "primevue/inputtext";
     background: rgb(0, 47, 111);
     background: linear-gradient(106deg, rgba(0, 47, 111, 1) 0%, rgba(13, 129, 136, 1) 49%, rgba(0, 47, 111, 1) 100%);
     width: 50%;
+  }
+
+  &__input-value.style {
+    cursor: pointer;
   }
 
   &__subject-input {
