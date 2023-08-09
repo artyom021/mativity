@@ -52,4 +52,29 @@ export const ROUTES: RoutesType = {
     PATH: "/audio-service",
     NAME: "audio",
   },
+
+  POEMS_SERVICE: {
+    PATH: "/poems-service",
+    NAME: "textPoems",
+  },
+
+  PARAPHRASING_SERVICE: {
+    PATH: "/paraphrasing-service",
+    NAME: "textParaphrasing",
+  },
+
+  CREATIVE_SERVICE: {
+    PATH: "/creative-service",
+    NAME: "textCreative",
+  },
+};
+
+export const ROUTE_MAPPING: { [key: string]: string } = {
+  home: "home",
+  text: "text",
+  textPoems: "text",
+  textParaphrasing: "text",
+  textCreative: "text",
+  image: "image",
+  audio: "audio",
 };

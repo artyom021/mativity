@@ -62,6 +62,7 @@ import { FOOTER_LINKS } from "@/router/routes";
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 55px;
   }
 }
 </style>

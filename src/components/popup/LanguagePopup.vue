@@ -39,6 +39,7 @@ const onChangeLanguage = (language: string) => {
   top: 100px;
   flex-direction: column;
   gap: 20px;
+  z-index: 999;
   border: 2px solid $primary-900;
   border-radius: 8px;
   background-color: $grey-4000;

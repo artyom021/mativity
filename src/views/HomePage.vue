@@ -104,6 +104,7 @@
     align-items: center;
     margin-bottom: 40px;
     border-radius: 12px;
+    background-image: url("~@/assets/png/neon_background.png");
     background-color: #000;
     padding: 0 20px;
     width: 30%;

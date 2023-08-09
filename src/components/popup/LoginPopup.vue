@@ -18,7 +18,6 @@
 
 <script lang="ts" setup>
 import InputText from "primevue/inputtext";
-import { useOverlayMeta } from "unoverlay-vue";
 import { defineEmits, defineProps, ref } from "vue";
 
 defineProps({

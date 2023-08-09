@@ -32,10 +32,6 @@
       <div @click="openLoginPopup" class="header__profile-action">LOGIN</div>
       <div @click="openSignupPopup" class="header__profile-action">SIGN UP</div>
     </div>
-    <div>
-      <SignUpPopup :is-show-signup-popup="isShowSignupPopup" />
-      <LoginPopup :is-show-login-popup="isShowLoginPopup" />
-    </div>
   </div>
 </template>
 
@@ -46,8 +42,7 @@ import { useRoute, useRouter } from "vue-router";
 
 import StyledIcon from "@/components/customComponents/StyledIcon.vue";
 import LanguagePopup from "@/components/popup/LanguagePopup.vue";
-import LoginPopup from "@/components/popup/LoginPopup.vue";
-import SignUpPopup from "@/components/popup/SignupPopup.vue";
+import { ROUTE_MAPPING } from "@/constants/routes";
 import { HEADER_LINKS } from "@/router/routes";
 import { useAppStore } from "@/store/app/appStore";
 
@@ -56,14 +51,12 @@ const route = useRoute();
 
 const appStore = useAppStore();
 const { currentLanguage } = storeToRefs(appStore);
-const { updateLanguage } = appStore;
+const { updateLanguage, updateLoginPopup, updateSignupPopup } = appStore;
 
 const isShowLanguageMenu = ref(false);
-const isShowLoginPopup = ref(false);
-const isShowSignupPopup = ref(false);
 
 const isCurrentRoute = (routeName: string) => {
-  return routeName.toLowerCase() === route.name;
+  return routeName.toLowerCase() === ROUTE_MAPPING[route.name as string];
 };
 
 const offsetLeft = ref(0);
@@ -85,11 +78,11 @@ const onChangeRoute = (routeLink: string) => {
 };
 
 const openLoginPopup = () => {
-  isShowLoginPopup.value = !isShowLoginPopup.value;
+  updateLoginPopup();
 };
 
 const openSignupPopup = () => {
-  isShowSignupPopup.value = !isShowSignupPopup.value;
+  updateSignupPopup();
 };
 </script>
 

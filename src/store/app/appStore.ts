@@ -18,9 +18,24 @@ export const useAppStore = defineStore("appStore", () => {
     currentLanguage.value = value;
   };
 
+  const isShowLoginPopup = ref(false);
+  const isShowSignupPopup = ref(false);
+
+  const updateLoginPopup = () => {
+    isShowLoginPopup.value = !isShowLoginPopup.value;
+  };
+
+  const updateSignupPopup = () => {
+    isShowLoginPopup.value = !isShowLoginPopup.value;
+  };
+
   return {
     isLoading,
     currentLanguage,
     updateLanguage,
+    isShowLoginPopup,
+    isShowSignupPopup,
+    updateSignupPopup,
+    updateLoginPopup,
   };
 });
