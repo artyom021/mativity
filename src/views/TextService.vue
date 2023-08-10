@@ -1,6 +1,6 @@
 <template>
   <div class="text-services">
-    <div class="text-services__title">WordCraft</div>
+    <div class="text-services__title">Text Services</div>
     <div class="text-services__services">
       <div class="text-services__service">
         <div class="text-services__service-name">
@@ -104,7 +104,7 @@ import { useRouter } from "vue-router";
 
 import { ROUTES } from "@/constants/routes";
 
-interface ShowHints {
+export interface ShowHints {
   [key: string]: boolean;
 }
 

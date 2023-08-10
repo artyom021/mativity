@@ -67,6 +67,11 @@ export const ROUTES: RoutesType = {
     PATH: "/creative-service",
     NAME: "textCreative",
   },
+
+  IMAGE_GENERATOR: {
+    PATH: "/image-generator",
+    NAME: "imageGenerator",
+  },
 };
 
 export const ROUTE_MAPPING: { [key: string]: string } = {
@@ -76,5 +81,6 @@ export const ROUTE_MAPPING: { [key: string]: string } = {
   textParaphrasing: "text",
   textCreative: "text",
   image: "image",
+  imageGenerator: "image",
   audio: "audio",
 };
