@@ -72,6 +72,11 @@ export const ROUTES: RoutesType = {
     PATH: "/image-generator",
     NAME: "imageGenerator",
   },
+
+  AUDIO_GENERATOR: {
+    PATH: "/audio-generator",
+    NAME: "audioGenerator",
+  },
 };
 
 export const ROUTE_MAPPING: { [key: string]: string } = {
@@ -83,4 +88,5 @@ export const ROUTE_MAPPING: { [key: string]: string } = {
   image: "image",
   imageGenerator: "image",
   audio: "audio",
+  audioGenerator: "audio",
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home__logo">
-      <img :src="require(`@/assets/gif/logo_animated.gif`)" alt="Logo" />
+      <img :src="require(`@/assets/gif/logo_animated.gif`)" alt="Logo" class="home__logo-animation" />
     </div>
 
     <div class="home__hero">
@@ -50,7 +50,7 @@
 @import "@/scss/variables.scss";
 
 .home {
-  padding: 0 $space-normal;
+  //padding: 0 $space-normal;
 
   &__hero {
     display: flex;
@@ -60,8 +60,9 @@
 
     width: 70%;
   }
-
   &__logo img {
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 100%);
+    padding-bottom: 50px;
     width: 100%;
   }
 

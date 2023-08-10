@@ -2,7 +2,7 @@
   <div class="images">
     <div class="images__title">
       <img :src="require(`@/assets/svg/poems.svg`)" alt="Poems" class="images__service-img" />
-      <div class="images__service-title">Paraphrasing</div>
+      <div class="images__service-title">Generator Images</div>
     </div>
 
     <Accordion class="images__accordion">

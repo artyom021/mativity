@@ -2,11 +2,11 @@
   <div class="app" id="app">
     <PageHeader />
     <router-view v-slot="{ Component }">
-      <suspense>
-        <div>
-          <component :is="Component" :key="$route.path"></component>
-        </div>
-      </suspense>
+      <Transition mode="out-in" name="fade">
+        <suspense>
+          <component :is="Component"></component>
+        </suspense>
+      </Transition>
     </router-view>
     <PageFooter />
     <div :class="{ 'app-overlay--show ': isShowLoginPopup }" class="app-overlay">
@@ -57,5 +57,15 @@ body {
 
 .app-overlay--show {
   display: flex;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

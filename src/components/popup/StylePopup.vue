@@ -9,7 +9,7 @@
       modal
     >
       <div class="style-popup">
-        <div v-for="style in styleOptions" :key="style.value" @click="onStyleChange(style)" class="style-popup__item">
+        <div v-for="style in styles" :key="style.value" @click="onStyleChange(style)" class="style-popup__item">
           {{ style.title }}
         </div>
       </div>
@@ -25,38 +25,8 @@ import { Style } from "@/views/PoemsService.vue";
 
 const props = defineProps({
   visible: Boolean,
+  styles: Array,
 });
-
-const styleOptions = [
-  {
-    title: "Haiku",
-    value: "haiku",
-  },
-  {
-    title: "Legend",
-    value: "legend",
-  },
-  {
-    title: "Fable",
-    value: "fable",
-  },
-  {
-    title: "Prose",
-    value: "prose",
-  },
-  {
-    title: "Ballad",
-    value: "ballad",
-  },
-  {
-    title: "Sonnet",
-    value: "sonnet",
-  },
-  {
-    title: "Story",
-    value: "story",
-  },
-];
 
 const emit = defineEmits(["onChangeShowPopup"]);
 

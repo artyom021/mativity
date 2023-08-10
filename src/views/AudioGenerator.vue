@@ -1,45 +1,36 @@
 <template>
-  <div class="poems">
-    <div class="poems__title">
-      <img :src="require(`@/assets/svg/poems.svg`)" alt="Poems" class="poems__service-img" />
-      <div class="poems__service-title">Generating Poems</div>
+  <div class="audio-generator">
+    <div class="audio-generator__title">
+      <img :src="require(`@/assets/svg/poems.svg`)" alt="Audio" class="audio-generator__service-img" />
+      <div class="audio-generator__service-title">Generator Audio</div>
     </div>
 
-    <Accordion class="poems__accordion">
-      <AccordionTab class="poems__accordion-tab" header="Instructions">
+    <Accordion class="audio-generator__accordion">
+      <AccordionTab class="audio-generator__accordion-tab" header="Instructions">
         <span>1. Enter the subject (No more than 300 characters)</span>
         <span>2. Select the style, number and size of stanzas;</span>
         <span>3. Click generate. </span>
       </AccordionTab>
     </Accordion>
 
-    <div class="poems__input">
-      <div class="poems__input-title">Style</div>
-      <div @click="isShowPopup = !isShowPopup" class="poems__input-value style">{{ selectedStyle.title }}</div>
+    <div class="audio-generator__input">
+      <div class="audio-generator__input-title">Voice Selection</div>
+      <div @click="isShowPopup = !isShowPopup" class="audio-generator__input-value">{{ selectedStyle.title }}</div>
     </div>
 
-    <div class="poems__input">
-      <div class="poems__input-title">Stanza Size</div>
-      <div class="poems__input-value">10</div>
-    </div>
-
-    <div class="poems__input">
-      <div class="poems__input-title">Stanza Count</div>
-      <div class="poems__input-value">10</div>
-    </div>
-
-    <span class="p-input-icon-right poems__subject-input">
+    <span class="p-input-icon-right audio-generator__subject-input">
       <i class="pi pi pi-pencil" />
       <InputText v-model="value2" placeholder="Enter Subject" />
     </span>
 
-    <div class="poems__generation">
-      <div class="poems__generation-title">1 Generation</div>
-      <div class="poems__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 10</div>
+    <div class="audio-generator__generation">
+      <div class="audio-generator__generation-title">1 Generation</div>
+      <div class="audio-generator__generation-value">
+        <img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 20
+      </div>
     </div>
 
-    <div class="poems__generate-btn">Generate</div>
-    <StylePopup :styles="styleOptions" :visible="isShowPopup" @on-change-show-popup="onPopupHide" />
+    <div class="audio-generator__generate-btn">Generate</div>
   </div>
 </template>
 
@@ -49,56 +40,21 @@ import AccordionTab from "primevue/accordiontab";
 import InputText from "primevue/inputtext";
 import { ref } from "vue";
 
-import StylePopup from "@/components/popup/StylePopup.vue";
-export interface Style {
-  title: string;
-  value: string;
-}
+import { Style } from "@/views/PoemsService.vue";
 
-const selectedStyle = ref<Style>({ title: "Fable", value: "fable" });
-const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
-  isShowPopup.value = val.isShowPopup;
-  if (val.style) {
-    selectedStyle.value = val.style;
-  }
-};
+const selectedStyle = ref<Style>({ title: "Anime", value: "anime" });
+// const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
+//   isShowPopup.value = val.isShowPopup;
+//   if (val.style) {
+//     selectedStyle.value = val.style;
+//   }
+// };
 
 const isShowPopup = ref<boolean>(false);
-
-const styleOptions = [
-  {
-    title: "Haiku",
-    value: "haiku",
-  },
-  {
-    title: "Legend",
-    value: "legend",
-  },
-  {
-    title: "Fable",
-    value: "fable",
-  },
-  {
-    title: "Prose",
-    value: "prose",
-  },
-  {
-    title: "Ballad",
-    value: "ballad",
-  },
-  {
-    title: "Sonnet",
-    value: "sonnet",
-  },
-  {
-    title: "Story",
-    value: "story",
-  },
-];
 </script>
 
 <style lang="scss" scoped>
-.poems {
+.audio-generator {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -128,7 +84,7 @@ const styleOptions = [
 <style lang="scss">
 @import "@/scss/colors.scss";
 
-.poems {
+.audio-generator {
   .p-icon {
     order: 1;
     color: white;
@@ -155,15 +111,12 @@ const styleOptions = [
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     background: rgb(0, 47, 111);
     background: linear-gradient(106deg, rgba(0, 47, 111, 1) 0%, rgba(13, 129, 136, 1) 49%, rgba(0, 47, 111, 1) 100%);
     width: 50%;
-  }
-
-  &__input-value.style {
-    cursor: pointer;
   }
 
   &__subject-input {

@@ -1,10 +1,12 @@
 import { RouteRecordRaw } from "vue-router";
 
 import { ROUTES } from "@/constants/routes";
+import AudioGenerator from "@/views/AudioGenerator.vue";
 import AudioService from "@/views/AudioService.vue";
 import CreativeService from "@/views/CreativeService.vue";
 import HomePage from "@/views/HomePage.vue";
 import ImageService from "@/views/ImageService.vue";
+import ImagesGenerator from "@/views/ImagesGenerator.vue";
 import ParapharsingService from "@/views/ParapharsingService.vue";
 import PoemsService from "@/views/PoemsService.vue";
 import TextService from "@/views/TextService.vue";
@@ -84,5 +86,17 @@ export const routes: Array<RouteRecordRaw> = [
     path: ROUTES.CREATIVE_SERVICE.PATH,
     name: ROUTES.CREATIVE_SERVICE.NAME,
     component: CreativeService,
+  },
+
+  {
+    path: ROUTES.IMAGE_GENERATOR.PATH,
+    name: ROUTES.IMAGE_GENERATOR.NAME,
+    component: ImagesGenerator,
+  },
+
+  {
+    path: ROUTES.AUDIO_GENERATOR.PATH,
+    name: ROUTES.AUDIO_GENERATOR.NAME,
+    component: AudioGenerator,
   },
 ];

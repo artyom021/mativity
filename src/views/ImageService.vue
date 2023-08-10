@@ -68,7 +68,7 @@ const onChangeRoute = (routeLink: string) => {
   padding-left: 20px;
 
   &__title {
-    padding-top: 50px;
+    padding-top: 90px;
     padding-bottom: 30px;
     font-weight: 700;
     font-size: 36px;

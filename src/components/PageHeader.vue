@@ -1,37 +1,40 @@
 <template>
   <div class="header">
-    <div class="header__company">
-      <img :src="require(`@/assets/png/eye_logo_small.png`)" alt="Logo" />
-      <img :src="require(`@/assets/svg/Mativity.svg`)" alt="Mativity" />
-    </div>
+    <div class="header__container">
+      <div class="header__company">
+        <img :src="require(`@/assets/png/eye_logo_small.png`)" alt="Logo" />
+        <img :src="require(`@/assets/svg/Mativity.svg`)" alt="Mativity" />
+      </div>
 
-    <div class="header__language-selector">
-      <div @click="toggleLanguageMenu">
-        <img :src="require(`@/assets/svg/flags/${currentLanguage}.svg`)" alt="Country" class="header__country-flag" />
+      <div class="header__language-selector">
+        <div @click="toggleLanguageMenu">
+          <img :src="require(`@/assets/svg/flags/${currentLanguage}.svg`)" alt="Country" class="header__country-flag" />
+        </div>
+      </div>
+
+      <LanguagePopup
+        :is-show-language-menu="isShowLanguageMenu"
+        :offset-left="offsetLeft"
+        @onChangeLanguage="onChangeLanguage"
+      />
+
+      <div class="header__links">
+        <div v-for="link in HEADER_LINKS" :key="link.name" class="header__link">
+          <StyledIcon
+            :color="isCurrentRoute(link.name) ? '#08ECEC' : '#646464'"
+            :icon="link.name"
+            @click="onChangeRoute(link.link)"
+            class="icons"
+          />
+        </div>
+      </div>
+
+      <div class="header__profile-actions">
+        <div @click="openLoginPopup" class="header__profile-action">LOGIN</div>
+        <div @click="openSignupPopup" class="header__profile-action">SIGN UP</div>
       </div>
     </div>
-
-    <LanguagePopup
-      :is-show-language-menu="isShowLanguageMenu"
-      :offset-left="offsetLeft"
-      @onChangeLanguage="onChangeLanguage"
-    />
-
-    <div class="header__links">
-      <div v-for="link in HEADER_LINKS" :key="link.name" class="header__link">
-        <StyledIcon
-          :color="isCurrentRoute(link.name) ? '#08ECEC' : '#646464'"
-          :icon="link.name"
-          @click="onChangeRoute(link.link)"
-          class="icons"
-        />
-      </div>
-    </div>
-
-    <div class="header__profile-actions">
-      <div @click="openLoginPopup" class="header__profile-action">LOGIN</div>
-      <div @click="openSignupPopup" class="header__profile-action">SIGN UP</div>
-    </div>
+    <img :src="require(`@/assets/png/top_neon.png`)" alt="Neon" class="header__neon-bg" />
   </div>
 </template>
 
@@ -91,12 +94,16 @@ const openSignupPopup = () => {
 @import "@/scss/variables.scss";
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: $grey-1000;
-  padding: 0 $space-normal;
-  height: 100px;
+  &__container {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    background-color: $grey-1000;
+    padding: 0 $space-normal;
+    height: 100px;
+  }
 
   &__company {
     display: flex;
@@ -134,6 +141,13 @@ const openSignupPopup = () => {
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 2px;
+  }
+
+  &__neon-bg {
+    position: absolute;
+    z-index: 1;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 100%);
+    width: 100%;
   }
 }
 </style>
