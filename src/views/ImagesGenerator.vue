@@ -33,7 +33,7 @@
       <div class="images__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 20</div>
     </div>
 
-    <div class="images__generate-btn">Generate</div>
+    <div class="images__generate-btn btn-neon">Generate</div>
 
     <StylePopup :styles="styleOptions" :visible="isShowPopup" @on-change-show-popup="onPopupHide" />
   </div>

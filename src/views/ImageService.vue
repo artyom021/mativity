@@ -9,8 +9,13 @@
         </div>
 
         <div class="image-services__service-btn-container">
-          <div @click="onChangeRoute(ROUTES.IMAGE_GENERATOR.PATH)" class="image-services__service-btn">STARTED</div>
-          <div @click="showHint({ value: !hints.poems, hintName: 'images' })" class="image-services__service-btn">
+          <div @click="onChangeRoute(ROUTES.IMAGE_GENERATOR.PATH)" class="image-services__service-btn btn-neon">
+            STARTED
+          </div>
+          <div
+            @click="showHint({ value: !hints.poems, hintName: 'images' })"
+            class="image-services__service-btn btn-neon"
+          >
             HOW TO USE
           </div>
         </div>

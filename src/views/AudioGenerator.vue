@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="audio-generator__generate-btn">Generate</div>
+    <div class="audio-generator__generate-btn btn-neon">Generate</div>
   </div>
 </template>
 

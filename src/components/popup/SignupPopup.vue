@@ -10,7 +10,7 @@
         By clicking log in, or continuing with the other options below, you agree to Terms of Service and have read the
         Privacy Policy
       </div>
-      <div class="signup-popup__submit-btn">SIGN UP</div>
+      <div class="signup-popup__submit-btn btn-neon">SIGN UP</div>
       <div class="signup-popup__new-to">New to Maxtivity? Sign Up</div>
     </div>
   </Transition>
@@ -53,6 +53,7 @@ const confirmation = ref<boolean>(false);
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     border: 2px solid $primary-400;
     border-radius: 12px;
     height: 80px;

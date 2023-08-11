@@ -9,8 +9,13 @@
         </div>
 
         <div class="text-services__service-btn-container">
-          <div @click="onChangeRoute(ROUTES.POEMS_SERVICE.PATH)" class="text-services__service-btn">STARTED</div>
-          <div @click="showHint({ value: !hints.poems, hintName: 'poems' })" class="text-services__service-btn">
+          <div @click="onChangeRoute(ROUTES.POEMS_SERVICE.PATH)" class="text-services__service-btn btn-neon">
+            STARTED
+          </div>
+          <div
+            @click="showHint({ value: !hints.poems, hintName: 'poems' })"
+            class="text-services__service-btn btn-neon"
+          >
             HOW TO USE
           </div>
         </div>
@@ -38,10 +43,12 @@
         </div>
 
         <div class="text-services__service-btn-container">
-          <div @click="onChangeRoute(ROUTES.PARAPHRASING_SERVICE.PATH)" class="text-services__service-btn">STARTED</div>
+          <div @click="onChangeRoute(ROUTES.PARAPHRASING_SERVICE.PATH)" class="text-services__service-btn btn-neon">
+            STARTED
+          </div>
           <div
             @click="showHint({ value: !hints.paraphrasing, hintName: 'paraphrasing' })"
-            class="text-services__service-btn"
+            class="text-services__service-btn btn-neon"
           >
             HOW TO USE
           </div>
@@ -70,8 +77,13 @@
         </div>
 
         <div class="text-services__service-btn-container">
-          <div @click="onChangeRoute(ROUTES.CREATIVE_SERVICE.PATH)" class="text-services__service-btn">STARTED</div>
-          <div @click="showHint({ value: !hints.creative, hintName: 'creative' })" class="text-services__service-btn">
+          <div @click="onChangeRoute(ROUTES.CREATIVE_SERVICE.PATH)" class="text-services__service-btn btn-neon">
+            STARTED
+          </div>
+          <div
+            @click="showHint({ value: !hints.creative, hintName: 'creative' })"
+            class="text-services__service-btn btn-neon"
+          >
             HOW TO USE
           </div>
         </div>
@@ -172,6 +184,7 @@ const onChangeRoute = (routeLink: string) => {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
     margin-bottom: 58px;
     border: 2px solid $primary-400;

@@ -9,7 +9,7 @@
         Privacy Policy
       </div>
 
-      <div class="login-popup__submit-btn">LOG IN</div>
+      <div class="login-popup__submit-btn btn-neon">LOG IN</div>
       <div class="login-popup__forgot-password">Forgot you password?</div>
       <div class="login-popup__new-to">New to Maxtivity? Sign Up</div>
     </div>
@@ -51,6 +51,7 @@ const showPopup = ref<boolean>(false);
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     border: 2px solid $primary-400;
     border-radius: 12px;
     height: 80px;

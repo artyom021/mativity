@@ -9,8 +9,13 @@
         </div>
 
         <div class="audio-services__service-btn-container">
-          <div @click="onChangeRoute(ROUTES.AUDIO_GENERATOR.PATH)" class="audio-services__service-btn">STARTED</div>
-          <div @click="showHint({ value: !hints.audio, hintName: 'audio' })" class="audio-services__service-btn">
+          <div @click="onChangeRoute(ROUTES.AUDIO_GENERATOR.PATH)" class="audio-services__service-btn btn-neon">
+            STARTED
+          </div>
+          <div
+            @click="showHint({ value: !hints.audio, hintName: 'audio' })"
+            class="audio-services__service-btn btn-neon"
+          >
             HOW TO USE
           </div>
         </div>

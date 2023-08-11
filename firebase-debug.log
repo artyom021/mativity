@@ -1,0 +1,14 @@
+[debug] [2023-08-11T00:26:21.861Z] ----------------------------------------------------------------------
+[debug] [2023-08-11T00:26:21.862Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-08-11T00:26:21.862Z] CLI Version:   12.4.7
+[debug] [2023-08-11T00:26:21.862Z] Platform:      darwin
+[debug] [2023-08-11T00:26:21.863Z] Node Version:  v16.16.0
+[debug] [2023-08-11T00:26:21.863Z] Time:          Fri Aug 11 2023 03:26:21 GMT+0300 (Moscow Standard Time)
+[debug] [2023-08-11T00:26:21.863Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-11T00:26:21.895Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-11T00:26:21.895Z] > authorizing via signed-in user (artem.mygtd@gmail.com)
+[debug] [2023-08-11T00:26:21.895Z] [iam] checking project mativity-dc1c7 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-11T00:26:21.896Z] > refreshing access token with scopes: []
+[debug] [2023-08-11T00:26:21.896Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-08-11T00:26:21.897Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]

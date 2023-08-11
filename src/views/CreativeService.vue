@@ -15,7 +15,18 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Themes</div>
-      <div class="poems__input-value">Fable</div>
+      <!--      <PanelMenu v-model:expandedKeys="expandedKeys" :model="items" @update:expandedKeys="closePanel" class="w-full" />-->
+      <TreeSelect
+        v-model="selectedValue"
+        :options="items"
+        metaKeySelection
+        placeholder="Select Theme"
+        selection-mode="single"
+      >
+        <template #default="slotProps">
+          <span @click="closePanel">{{ slotProps.label }}asd</span>
+        </template>
+      </TreeSelect>
     </div>
 
     <div class="poems__generation">
@@ -23,14 +34,113 @@
       <div class="poems__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 10</div>
     </div>
 
-    <div class="poems__generate-btn">Generate</div>
+    <div class="poems__generate-btn btn-neon">Generate</div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-import InputText from "primevue/inputtext";
+// import PanelMenu from "primevue/panelmenu";
+import TreeSelect from "primevue/treeselect";
+import { ref } from "vue";
+
+const selectedTheme = ref<string>("Select Theme");
+const expandedKeys = ref({});
+
+const selectedValue = ref(null);
+
+const items = [
+  {
+    key: "0",
+    label: "Business Ideas",
+    selectable: false,
+    leaf: true,
+    children: [
+      {
+        key: "0_0",
+        label: "Idea 1",
+        data: "idea",
+        command: () => {
+          selectedTheme.value = "Idea 1";
+          expandedKeys.value = {};
+        },
+      },
+      {
+        key: "0_1",
+        label: "Idea 2",
+        data: "idea",
+        command: () => {
+          selectedTheme.value = "Idea 2";
+        },
+      },
+    ],
+  },
+  {
+    key: "1",
+    label: "Ideas for a Gift",
+    selectable: false,
+    children: [
+      {
+        key: "1_0",
+        label: "Idea 1",
+      },
+      {
+        key: "1_1",
+        label: "Idea 2",
+      },
+    ],
+  },
+  {
+    label: "What to do in your free time",
+    key: "2",
+    selectable: false,
+    children: [
+      {
+        key: "2_0",
+        label: "Idea 1",
+      },
+      {
+        key: "2_1",
+        label: "Idea 2",
+      },
+    ],
+  },
+  {
+    label: "An idea for sports",
+    key: "3",
+    selectable: false,
+    children: [
+      {
+        label: "Idea 1",
+        key: "3_0",
+      },
+      {
+        key: "3_1",
+        label: "Idea 2",
+      },
+    ],
+  },
+  {
+    label: "What to do on vacation",
+    key: "4",
+    selectable: false,
+    children: [
+      {
+        label: "Idea 1",
+        key: "4_0",
+      },
+      {
+        label: "Idea 2",
+        key: "4_1",
+      },
+    ],
+  },
+];
+
+const closePanel = (val: any) => {
+  console.log(1111);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -203,5 +313,71 @@ import InputText from "primevue/inputtext";
 
 .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
   box-shadow: inset 0 0 0 0.1rem $primary-100 !important;
+}
+
+.p-panelmenu .p-panelmenu-header {
+  background: linear-gradient(106deg, rgb(0, 47, 111) 0%, rgb(13, 129, 136) 49%, rgb(0, 47, 111) 100%) !important;
+  width: 100% !important;
+}
+
+.p-treeselect {
+  background: rgb(0, 47, 111) !important;
+  background: linear-gradient(
+    106deg,
+    rgba(0, 47, 111, 1) 0%,
+    rgba(13, 129, 136, 1) 49%,
+    rgba(0, 47, 111, 1) 100%
+  ) !important;
+  width: 50% !important;
+}
+
+.p-treeselect-label-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.p-treeselect .p-treeselect-label.p-placeholder,
+.p-treenode-label,
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+  color: white !important;
+}
+.p-tree {
+  border: 1px solid black !important;
+  background: black !important;
+}
+
+.p-treeselect {
+  border: 1px solid black !important;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:focus {
+  box-shadow: 0 0 0 0.2rem $primary-200 !important;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler:enabled:hover {
+  background: unset !important;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
+  background-color: $primary-300 !important;
+  color: black !important;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
+  background-color: $primary-100 !important;
+}
+
+.p-treeselect:not(.p-disabled):hover {
+  border-color: $primary-200 !important;
+}
+
+.p-treeselect:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 0.2rem $primary-200 !important;
+  border-color: $primary-200 !important;
+}
+
+.p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+  box-shadow: inset 0 0 0 0.15rem $primary-200 !important;
 }
 </style>

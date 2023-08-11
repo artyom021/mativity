@@ -15,7 +15,7 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <div class="poems__input-value">Fable</div>
+      <Dropdown v-model="selectedStyle" :options="items" optionLabel="label" placeholder="Select a City" />
     </div>
 
     <span class="p-input-icon-right poems__subject-input">
@@ -28,14 +28,51 @@
       <div class="poems__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 10</div>
     </div>
 
-    <div class="poems__generate-btn">Generate</div>
+    <div class="poems__generate-btn btn-neon">Generate</div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
+import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
+import { ref } from "vue";
+
+import { Style } from "@/views/PoemsService.vue";
+
+const selectedStyle = ref<Style>({ label: "Fable", value: "fable" });
+
+const items = ref([
+  {
+    label: "Haiku",
+    value: "haiku",
+  },
+  {
+    label: "Legend",
+    value: "legend",
+  },
+  {
+    label: "Fable",
+    value: "fable",
+  },
+  {
+    label: "Prose",
+    value: "prose",
+  },
+  {
+    label: "Ballad",
+    value: "ballad",
+  },
+  {
+    label: "Sonnet",
+    value: "sonnet",
+  },
+  {
+    label: "Story",
+    value: "story",
+  },
+]);
 </script>
 
 <style lang="scss" scoped>

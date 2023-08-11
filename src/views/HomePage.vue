@@ -87,6 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-out;
     cursor: pointer;
     margin-top: 60px;
     border: 3px solid $primary-300;
@@ -98,14 +99,22 @@
     letter-spacing: 2px;
   }
 
+  &__get-started:hover {
+    box-shadow: $primary-300 0px 0px 22px;
+    border: 4px solid $primary-300;
+    padding-left: 2px;
+    //text-shadow: white 1px 0px 2px;
+  }
+
   &__service-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 40px;
     border-radius: 12px;
     background-image: url("~@/assets/png/neon_background.png");
+    background-size: cover;
     background-color: #000;
     padding: 0 20px;
     width: 30%;
@@ -144,15 +153,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-out;
     margin-top: 30px;
+    margin-bottom: 20px;
     border: 2px solid #01ddeb;
     border-radius: 50px;
+    background: black;
     padding: 0 10px;
     width: 70%;
     height: 105px;
     font-weight: 700;
     font-size: 30px;
     letter-spacing: 3px;
+  }
+
+  &__card-btn:hover {
+    box-shadow: $primary-300 0px 0px 18px;
+    border: 4px solid $primary-300;
+    padding-right: 2px;
+    //text-shadow: white 1px 0px 2px;
   }
 }
 </style>

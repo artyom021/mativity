@@ -15,7 +15,7 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <div @click="isShowPopup = !isShowPopup" class="poems__input-value style">{{ selectedStyle.title }}</div>
+      <Dropdown v-model="selectedStyle" :options="items" optionLabel="label" placeholder="Select a City" />
     </div>
 
     <div class="poems__input">
@@ -38,7 +38,7 @@
       <div class="poems__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 10</div>
     </div>
 
-    <div class="poems__generate-btn">Generate</div>
+    <div class="poems__generate-btn btn-neon">Generate</div>
     <StylePopup :styles="styleOptions" :visible="isShowPopup" @on-change-show-popup="onPopupHide" />
   </div>
 </template>
@@ -46,16 +46,17 @@
 <script lang="ts" setup>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
+import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
 import { ref } from "vue";
 
 import StylePopup from "@/components/popup/StylePopup.vue";
 export interface Style {
-  title: string;
+  label: string;
   value: string;
 }
 
-const selectedStyle = ref<Style>({ title: "Fable", value: "fable" });
+const selectedStyle = ref<Style>({ label: "Fable", value: "fable" });
 const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
   isShowPopup.value = val.isShowPopup;
   if (val.style) {
@@ -65,36 +66,40 @@ const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
 
 const isShowPopup = ref<boolean>(false);
 
-const styleOptions = [
+const menu = ref();
+const items = ref([
   {
-    title: "Haiku",
+    label: "Haiku",
     value: "haiku",
   },
   {
-    title: "Legend",
+    label: "Legend",
     value: "legend",
   },
   {
-    title: "Fable",
+    label: "Fable",
     value: "fable",
   },
   {
-    title: "Prose",
+    label: "Prose",
     value: "prose",
   },
   {
-    title: "Ballad",
+    label: "Ballad",
     value: "ballad",
   },
   {
-    title: "Sonnet",
+    label: "Sonnet",
     value: "sonnet",
   },
   {
-    title: "Story",
+    label: "Story",
     value: "story",
   },
-];
+]);
+const toggle = (event) => {
+  menu.value.toggle(event);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -159,6 +164,7 @@ const styleOptions = [
     border-bottom-right-radius: 8px;
     background: rgb(0, 47, 111);
     background: linear-gradient(106deg, rgba(0, 47, 111, 1) 0%, rgba(13, 129, 136, 1) 49%, rgba(0, 47, 111, 1) 100%);
+    padding-right: 28px;
     width: 50%;
   }
 
@@ -214,6 +220,7 @@ const styleOptions = [
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     margin-top: 20px;
     margin-bottom: 45px;
     border: 2px solid $primary-400;
@@ -271,5 +278,17 @@ const styleOptions = [
 
 .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
   box-shadow: inset 0 0 0 0.1rem $primary-100 !important;
+}
+
+.p-dropdown {
+  background: linear-gradient(106deg, rgb(0, 47, 111) 0%, rgb(13, 129, 136) 49%, rgb(0, 47, 111) 100%) !important;
+  width: 50% !important;
+}
+
+.p-dropdown .p-dropdown-label {
+  margin: auto 0 !important;
+  padding-left: 20px !important;
+  color: white !important;
+  text-align: center !important;
 }
 </style>

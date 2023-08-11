@@ -68,4 +68,124 @@ body {
 .fade-leave-to {
   opacity: 0;
 }
+
+.btn-neon:hover {
+  transition: all 0.2s ease-in-out;
+  box-shadow: $primary-300 0px 0px 22px;
+  border: 3px solid $primary-300;
+  padding-left: 2px;
+}
+
+.p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 0.2rem $primary-300 !important;
+  border-color: $primary-400 !important;
+}
+
+.p-dropdown:not(.p-disabled):hover {
+  border-color: $primary-100 !important;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem $primary-200 !important;
+  border-color: $primary-100 !important;
+}
+
+.p-dropdown-items-wrapper {
+  background-color: black !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  color: white !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  background: #00cdcd !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background: #0d8188 !important;
+}
+
+.p-panelmenu .p-panelmenu-panel:last-child .p-panelmenu-header:not(.p-highlight) .p-panelmenu-header-content {
+  background: rgb(0, 47, 111) !important;
+  background: linear-gradient(
+    106deg,
+    rgba(0, 47, 111, 1) 0%,
+    rgba(13, 129, 136, 1) 49%,
+    rgba(0, 47, 111, 1) 100%
+  ) !important;
+}
+
+.p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content {
+  background: rgb(0, 47, 111) !important;
+  background: linear-gradient(
+    106deg,
+    rgba(0, 47, 111, 1) 0%,
+    rgba(13, 129, 136, 1) 49%,
+    rgba(0, 47, 111, 1) 100%
+  ) !important;
+}
+
+.p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action {
+  color: white !important;
+}
+
+.p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action {
+  justify-content: space-between;
+}
+
+.p-panelmenu .p-panelmenu-header:not(.p-disabled):focus .p-panelmenu-header-content {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 0.2rem $primary-200 !important;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content .p-menuitem-link {
+  justify-content: space-between;
+}
+
+.p-panelmenu .p-panelmenu-content .p-panelmenu-root-list {
+  background: black !important;
+}
+
+.p-panelmenu .p-panelmenu-content {
+  background: black !important;
+}
+
+.p-panelmenu
+  .p-panelmenu-content
+  .p-menuitem:not(.p-highlight):not(.p-disabled)
+  > .p-menuitem-content:hover
+  .p-menuitem-link
+  .p-menuitem-text {
+  color: white !important;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background: black !important;
+  color: white !important;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content:hover {
+  color: $primary-200 !important;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
+  background-color: black !important;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
+  color: white !important;
+}
+
+.p-panelmenu
+  .p-panelmenu-content
+  .p-menuitem:not(.p-highlight):not(.p-disabled)
+  > .p-menuitem-content:hover
+  .p-menuitem-link
+  .p-menuitem-text {
+  color: $primary-200 !important;
+}
 </style>

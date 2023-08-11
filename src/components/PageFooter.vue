@@ -63,6 +63,7 @@ import { FOOTER_LINKS } from "@/router/routes";
 
   &__copyright {
     padding-top: 80px;
+    padding-bottom: 20px;
     color: $grey-6000;
     font-weight: 300;
     font-size: 14px;
