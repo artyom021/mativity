@@ -188,4 +188,10 @@ body {
   .p-menuitem-text {
   color: $primary-200 !important;
 }
+
+.p-inputtext {
+  color: #d8d8d8 !important;
+  font-weight: 600 !important;
+  font-size: 30px !important;
+}
 </style>

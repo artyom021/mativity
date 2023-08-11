@@ -15,7 +15,13 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <Dropdown v-model="selectedStyle" :options="items" optionLabel="label" placeholder="Select a City" />
+      <Dropdown
+        v-model="selectedStyle"
+        :options="items"
+        class="dropdown-poems"
+        optionLabel="label"
+        placeholder="Select a City"
+      />
     </div>
 
     <div class="poems__input">

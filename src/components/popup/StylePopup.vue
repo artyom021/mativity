@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="styless">
     <Dialog
       v-model:visible="isShowPopup"
       :closable="false"

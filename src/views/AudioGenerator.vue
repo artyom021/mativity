@@ -15,7 +15,7 @@
 
     <div class="audio-generator__input">
       <div class="audio-generator__input-title">Voice Selection</div>
-      <div @click="isShowPopup = !isShowPopup" class="audio-generator__input-value">{{ selectedStyle.title }}</div>
+      <div class="audio-generator__input-value">{{ selectedStyle.title }}</div>
     </div>
 
     <span class="p-input-icon-right audio-generator__subject-input">
@@ -31,6 +31,7 @@
     </div>
 
     <div class="audio-generator__generate-btn btn-neon">Generate</div>
+    <VoiceSelection :visible="isShowPopup" />
   </div>
 </template>
 
@@ -40,6 +41,7 @@ import AccordionTab from "primevue/accordiontab";
 import InputText from "primevue/inputtext";
 import { ref } from "vue";
 
+import VoiceSelection from "@/components/popup/VoiceSelection.vue";
 import { Style } from "@/views/PoemsService.vue";
 
 const selectedStyle = ref<Style>({ title: "Anime", value: "anime" });
