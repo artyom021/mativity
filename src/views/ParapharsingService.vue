@@ -15,7 +15,7 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <Dropdown v-model="selectedStyle" :options="items" optionLabel="label" placeholder="Select a City" />
+      <Dropdown v-model="selectedStyle" :options="paraphrasingStyles" optionLabel="label" placeholder="Select a City" />
     </div>
 
     <span class="p-input-icon-right poems__subject-input">
@@ -39,40 +39,10 @@ import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
 import { ref } from "vue";
 
+import { paraphrasingStyles } from "@/settings/textSettings";
 import { Style } from "@/views/PoemsService.vue";
 
 const selectedStyle = ref<Style>({ label: "Fable", value: "fable" });
-
-const items = ref([
-  {
-    label: "Haiku",
-    value: "haiku",
-  },
-  {
-    label: "Legend",
-    value: "legend",
-  },
-  {
-    label: "Fable",
-    value: "fable",
-  },
-  {
-    label: "Prose",
-    value: "prose",
-  },
-  {
-    label: "Ballad",
-    value: "ballad",
-  },
-  {
-    label: "Sonnet",
-    value: "sonnet",
-  },
-  {
-    label: "Story",
-    value: "story",
-  },
-]);
 </script>
 
 <style lang="scss" scoped>

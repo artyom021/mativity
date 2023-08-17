@@ -1,6 +1,7 @@
 <template>
   <div class="app" id="app">
     <PageHeader />
+    <ToastComponent />
     <router-view v-slot="{ Component }">
       <Transition mode="out-in" name="fade">
         <suspense>
@@ -8,22 +9,33 @@
         </suspense>
       </Transition>
     </router-view>
-    <PageFooter />
-    <div :class="{ 'app-overlay--show ': isShowLoginPopup }" class="app-overlay">
-      <SignUpPopup :is-show-signup-popup="isShowSignupPopup" />
-      <LoginPopup :is-show-login-popup="isShowLoginPopup" />
+    <div>
+      <PageFooter />
+      <div :class="{ 'app-overlay--show ': isShowLoginPopup | isShowSignupPopup }" class="app-overlay">
+        <LoginPopup :is-show-login-popup="isShowLoginPopup" />
+        <SignUpPopup :is-show-signup-popup="isShowSignupPopup" />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
+import { onBeforeMount } from "vue";
 
 import PageFooter from "@/components/PageFooter.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import LoginPopup from "@/components/popup/LoginPopup.vue";
 import SignUpPopup from "@/components/popup/SignupPopup.vue";
+import ToastComponent from "@/components/ToastComponent.vue";
+import { getToken } from "@/hooks/user/useUserRead";
 import { useAppStore } from "@/store/app/appStore";
+
+document.title = "Maxtivity";
+
+onBeforeMount(async () => {
+  await getToken();
+});
 
 const appStore = useAppStore();
 const { isShowLoginPopup, isShowSignupPopup } = storeToRefs(appStore);
@@ -44,19 +56,20 @@ body {
 }
 
 .app-overlay {
-  display: none;
   position: fixed;
   top: 0px;
   left: 0px;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
   background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
 }
 
 .app-overlay--show {
-  display: flex;
+  visibility: visible;
 }
 
 .fade-enter-active,
@@ -79,33 +92,6 @@ body {
 .p-inputtext:enabled:focus {
   box-shadow: 0 0 0 0.2rem $primary-300 !important;
   border-color: $primary-400 !important;
-}
-
-.p-dropdown:not(.p-disabled):hover {
-  border-color: $primary-100 !important;
-}
-
-.p-dropdown:not(.p-disabled).p-focus {
-  outline: 0 none;
-  outline-offset: 0;
-  box-shadow: 0 0 0 0.2rem $primary-200 !important;
-  border-color: $primary-100 !important;
-}
-
-.p-dropdown-items-wrapper {
-  background-color: black !important;
-}
-
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
-  color: white !important;
-}
-
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
-  background: #00cdcd !important;
-}
-
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
-  background: #0d8188 !important;
 }
 
 .p-panelmenu .p-panelmenu-panel:last-child .p-panelmenu-header:not(.p-highlight) .p-panelmenu-header-content {
@@ -193,5 +179,9 @@ body {
   color: #d8d8d8 !important;
   font-weight: 600 !important;
   font-size: 30px !important;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0.1rem 0 !important;
 }
 </style>

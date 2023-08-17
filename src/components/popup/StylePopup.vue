@@ -1,10 +1,11 @@
 <template>
-  <div class="styless">
+  <div>
     <Dialog
       v-model:visible="isShowPopup"
       :closable="false"
-      :style="{ width: '45vw' }"
+      :style="{ width: '50vw' }"
       @hide="onPopupHide"
+      class="style-popup-container"
       header="Choose a style:"
       modal
     >
@@ -86,8 +87,8 @@ const isShowPopup = computed({
   border-top-left-radius: 8px !important;
 }
 
-.p-dialog-content,
-.p-dialog-header {
+.style-popup-container .p-dialog-content,
+.style-popup-container .p-dialog-header {
   background-color: $primary-600 !important;
   color: white !important;
 }

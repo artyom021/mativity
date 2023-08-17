@@ -5,7 +5,7 @@
       <div class="image-services__service">
         <div class="image-services__service-name">
           <img :src="require(`@/assets/svg/poems.svg`)" alt="Poems" />
-          <div class="image-services__service-title">Generating Poems</div>
+          <div class="image-services__service-title">Generating Images</div>
         </div>
 
         <div class="image-services__service-btn-container">

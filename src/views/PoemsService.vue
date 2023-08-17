@@ -15,13 +15,7 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <Dropdown
-        v-model="selectedStyle"
-        :options="items"
-        class="dropdown-poems"
-        optionLabel="label"
-        placeholder="Select a City"
-      />
+      <SingleSelect :modelValue="selectedStyle" :options="poemStyles" class="dropdown-poems" optionLabel="label" />
     </div>
 
     <div class="poems__input">
@@ -52,11 +46,12 @@
 <script lang="ts" setup>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
 import { ref } from "vue";
 
+import SingleSelect from "@/components/inputs/SingleSelect.vue";
 import StylePopup from "@/components/popup/StylePopup.vue";
+import { poemStyles } from "@/settings/textSettings";
 export interface Style {
   label: string;
   value: string;
@@ -73,36 +68,7 @@ const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
 const isShowPopup = ref<boolean>(false);
 
 const menu = ref();
-const items = ref([
-  {
-    label: "Haiku",
-    value: "haiku",
-  },
-  {
-    label: "Legend",
-    value: "legend",
-  },
-  {
-    label: "Fable",
-    value: "fable",
-  },
-  {
-    label: "Prose",
-    value: "prose",
-  },
-  {
-    label: "Ballad",
-    value: "ballad",
-  },
-  {
-    label: "Sonnet",
-    value: "sonnet",
-  },
-  {
-    label: "Story",
-    value: "story",
-  },
-]);
+
 const toggle = (event) => {
   menu.value.toggle(event);
 };
@@ -284,17 +250,5 @@ const toggle = (event) => {
 
 .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
   box-shadow: inset 0 0 0 0.1rem $primary-100 !important;
-}
-
-.p-dropdown {
-  background: linear-gradient(106deg, rgb(0, 47, 111) 0%, rgb(13, 129, 136) 49%, rgb(0, 47, 111) 100%) !important;
-  width: 50% !important;
-}
-
-.p-dropdown .p-dropdown-label {
-  margin: auto 0 !important;
-  padding-left: 20px !important;
-  color: white !important;
-  text-align: center !important;
 }
 </style>

@@ -3,6 +3,7 @@ import { ToastMessageOptions } from "primevue/toast";
 import { Ref, ref } from "vue";
 
 import { LanguagesEnum } from "@/settings/languages";
+export const DEFAULT_TOAST_LIFE_TIME = 5000;
 
 interface ToastConfig extends ToastMessageOptions {
   action?: {
@@ -12,30 +13,47 @@ interface ToastConfig extends ToastMessageOptions {
 }
 
 export const useAppStore = defineStore("appStore", () => {
-  const isLoading: Ref<boolean> = ref(false);
   const currentLanguage = ref<string>(LanguagesEnum.English);
+  const isLoading: Ref<boolean> = ref(false);
+  const isShowLoginPopup = ref(false);
+  const isShowSignupPopup = ref(false);
+  const toast = ref<ToastConfig | null>(null);
+
   const updateLanguage = (value: string) => {
     currentLanguage.value = value;
   };
 
-  const isShowLoginPopup = ref(false);
-  const isShowSignupPopup = ref(false);
-
-  const updateLoginPopup = () => {
-    isShowLoginPopup.value = !isShowLoginPopup.value;
+  const updateToast = (value: ToastConfig | null) => {
+    toast.value = value;
   };
 
-  const updateSignupPopup = () => {
-    isShowLoginPopup.value = !isShowLoginPopup.value;
+  const updateIsLoading = (value: boolean) => {
+    isLoading.value = value;
+  };
+
+  const updateLoginPopup = (val: boolean) => {
+    isShowLoginPopup.value = val;
+  };
+
+  const updateSignupPopup = (val: boolean) => {
+    isShowSignupPopup.value = val;
+  };
+
+  const showToast = (config: ToastConfig) => {
+    updateToast({ ...config, life: config.life ?? DEFAULT_TOAST_LIFE_TIME });
   };
 
   return {
-    isLoading,
     currentLanguage,
-    updateLanguage,
+    isLoading,
     isShowLoginPopup,
     isShowSignupPopup,
-    updateSignupPopup,
+    toast,
+
+    showToast,
+    updateIsLoading,
+    updateLanguage,
     updateLoginPopup,
+    updateSignupPopup,
   };
 });

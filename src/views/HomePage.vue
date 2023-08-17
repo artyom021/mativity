@@ -5,37 +5,26 @@
     </div>
 
     <div class="home__hero">
-      <h1>We’ve trained a model called ChatGPT which interacts in a conversational way.</h1>
+      <h1>{{ $lang.text.homeHeading }}</h1>
       <div class="home__subtitle">
-        The dialogue format makes it possible for to answer followup questions, admit its mistakes, challenge incorrect
-        premises, and reject inappropriate requests.
+        {{ $lang.text.homeSubtitle }}
       </div>
-      <div class="home__get-started">GET STARTED</div>
+      <div class="home__get-started">{{ $lang.button.getStarted }}</div>
     </div>
 
     <div class="home__try-it" id="try-it">
-      <h2>Try It Now</h2>
+      <h2>{{ $lang.text.homeHeading2 }}</h2>
       <div class="home__service-card-container">
         <div class="home__service-card">
-          <span
-            >Text to speech neural network allows you to convert any text you input to audio recording. Choose your
-            language, dialect, gender and voice style among multiple options and enjoy.</span
-          >
+          <span>{{ $lang.text.serviceCard1 }}</span>
           <div class="home__card-btn">VoxAI</div>
         </div>
         <div class="home__service-card">
-          <span
-            >Image generating neural network creates unique pictures never seen before. Choose a style and describe your
-            vision. The possibilities are limitless, the result may surprise you.
-          </span>
+          <span>{{ $lang.text.serviceCard2 }} </span>
           <div class="home__card-btn">Neuro-Vision</div>
         </div>
         <div class="home__service-card">
-          <span
-            >Copywriting neural network can write you a poem, rephrase the existing text or give you a valuable idea.
-            Want to surprise everyone by an unheard epic ballad, increase originality of your student's work or come up
-            with an idea for a gift? We got that covered.</span
-          >
+          <span>{{ $lang.text.serviceCard3 }}</span>
           <div class="home__card-btn">WordCraft</div>
         </div>
       </div>
@@ -43,7 +32,9 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import lang from "@/i18n";
+</script>
 
 <style lang="scss" scoped>
 @import "@/scss/colors.scss";

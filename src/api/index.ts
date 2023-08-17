@@ -15,6 +15,14 @@ interface ResponseType {
   headers: AxiosHeaders;
 }
 
+export enum RequestMethod {
+  Get = "get",
+  Post = "post",
+  Put = "put",
+  Patch = "patch",
+  Delete = "delete",
+}
+
 export interface Config {
   path: string;
   method?: string;
@@ -24,14 +32,17 @@ export interface Config {
 
 export const API_BASE_ROUTE: string = process.env.VUE_APP_API_URL || "";
 
-export function useApi(config: Config) {
+export function useApi<T>(config: Config) {
   const data = ref();
   const response = ref({}) as Ref<ResponseType>;
 
   const checkToken = async (token: string | null): Promise<void> => {
     if (!token) {
       try {
-      } catch (e) {}
+        console.log(11);
+      } catch (e) {
+        console.log(e);
+      }
 
       return;
     }
@@ -119,6 +130,7 @@ export function useApi(config: Config) {
       data.value = response.value?.data || {};
     } catch (e) {
       if (axios.isAxiosError(e) && (e.response?.status === 403 || e.response?.status === 401)) {
+        console.log(111);
       } else {
         throw e;
       }

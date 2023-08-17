@@ -1,21 +1,25 @@
 <template>
-  <Transition name="bounce">
-    <div v-show="isShowLanguageMenu" :style="{ left: `${offsetLeft - 200}px` }" class="language-popup">
-      <div v-for="language in languages" :key="language.label" class="language-popup__language">
-        <div @click="onChangeLanguage(language.label)" class="">
-          <img
-            :src="require(`@/assets/svg/flags/${LanguagesEnum[language.label]}.svg`)"
-            alt=""
-            class="language-popup__language-flag"
-          />
-          <span class="language-popup__language-title">{{ language.label.toUpperCase() }}</span>
+  <OnClickOutside @trigger="onChangeLanguage('english')">
+    <Transition name="bounce">
+      <div v-show="isShowLanguageMenu" :style="{ left: `${offsetLeft - 200}px` }" class="language-popup">
+        <div v-for="language in languages" :key="language.label" class="language-popup__language">
+          <div @click="onChangeLanguage(language.label)" class="">
+            <img
+              :src="require(`@/assets/svg/flags/${LanguagesEnum[language.label]}.svg`)"
+              alt=""
+              class="language-popup__language-flag"
+            />
+            <span class="language-popup__language-title">{{ language.label.toUpperCase() }}</span>
+          </div>
         </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
+  </OnClickOutside>
 </template>
 
 <script lang="ts" setup>
+import { OnClickOutside } from "@vueuse/components";
+
 import { LanguagesEnum, languages } from "@/settings/languages";
 
 defineProps({

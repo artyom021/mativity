@@ -12,12 +12,6 @@
         </div>
       </div>
 
-      <LanguagePopup
-        :is-show-language-menu="isShowLanguageMenu"
-        :offset-left="offsetLeft"
-        @onChangeLanguage="onChangeLanguage"
-      />
-
       <div class="header__links">
         <div v-for="link in HEADER_LINKS" :key="link.name" class="header__link">
           <StyledIcon
@@ -30,12 +24,21 @@
       </div>
 
       <div class="header__profile-actions">
-        <div @click="openLoginPopup" class="header__profile-action">LOGIN</div>
-        <div @click="openSignupPopup" class="header__profile-action">SIGN UP</div>
+        <div :class="{ 'active-popup': isShowLoginPopup }" @click="openLoginPopup" class="header__profile-action">
+          LOGIN
+        </div>
+        <div :class="{ 'active-popup': isShowSignupPopup }" @click="openSignupPopup" class="header__profile-action">
+          SIGN UP
+        </div>
       </div>
     </div>
     <img :src="require(`@/assets/png/top_neon.png`)" alt="Neon" class="header__neon-bg" />
   </div>
+  <LanguagePopup
+    :is-show-language-menu="isShowLanguageMenu"
+    :offset-left="offsetLeft"
+    @onChangeLanguage="onChangeLanguage"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -53,7 +56,7 @@ const router = useRouter();
 const route = useRoute();
 
 const appStore = useAppStore();
-const { currentLanguage } = storeToRefs(appStore);
+const { currentLanguage, isShowSignupPopup, isShowLoginPopup } = storeToRefs(appStore);
 const { updateLanguage, updateLoginPopup, updateSignupPopup } = appStore;
 
 const isShowLanguageMenu = ref(false);
@@ -81,11 +84,15 @@ const onChangeRoute = (routeLink: string) => {
 };
 
 const openLoginPopup = () => {
-  updateLoginPopup();
+  if (!isShowLoginPopup.value) {
+    updateLoginPopup(true);
+  }
 };
 
 const openSignupPopup = () => {
-  updateSignupPopup();
+  if (!isShowSignupPopup.value) {
+    updateSignupPopup(true);
+  }
 };
 </script>
 
@@ -137,6 +144,7 @@ const openSignupPopup = () => {
   &__profile-action {
     fill: white;
     cursor: pointer;
+    border-bottom: 2px solid black;
     color: $primary-100;
     font-weight: 600;
     font-size: 20px;
@@ -148,6 +156,10 @@ const openSignupPopup = () => {
     z-index: 1;
     mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 100%);
     width: 100%;
+  }
+
+  .active-popup {
+    border-bottom: 2px solid #00cdcd;
   }
 }
 </style>

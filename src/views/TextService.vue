@@ -1,11 +1,11 @@
 <template>
   <div class="text-services">
-    <div class="text-services__title">Text Services</div>
+    <div class="text-services__title">{{ $lang.text.textServiceHeading }}</div>
     <div class="text-services__services">
       <div class="text-services__service">
         <div class="text-services__service-name">
           <img :src="require(`@/assets/svg/poems.svg`)" alt="Poems" />
-          <div class="text-services__service-title">Generating Poems</div>
+          <div class="text-services__service-title">{{ $lang.text.textServiceName }}</div>
         </div>
 
         <div class="text-services__service-btn-container">
@@ -29,8 +29,7 @@
             <div>
               <span class="text-services__hint-title">How to use:</span>
               <div class="text-services__hint-text">
-                Generates text on request while preserving the style. Request example: "Write a short story about a bear
-                in space in the style of the Brothers Grimm"
+                {{ $lang.text.textServiceHint }}
               </div>
             </div>
           </div>
@@ -63,8 +62,7 @@
             <div>
               <span class="text-services__hint-title">How to use:</span>
               <div class="text-services__hint-text">
-                Generates text on request while preserving the style. Request example: "Write a short story about a bear
-                in space in the style of the Brothers Grimm"
+                {{ $lang.text.textServiceHint }}
               </div>
             </div>
           </div>
@@ -98,8 +96,7 @@
             <div>
               <span class="text-services__hint-title">How to use:</span>
               <div class="text-services__hint-text">
-                Generates text on request while preserving the style. Request example: "Write a short story about a bear
-                in space in the style of the Brothers Grimm"
+                {{ $lang.text.textServiceHint }}
               </div>
             </div>
           </div>
@@ -115,6 +112,7 @@ import "primeicons/primeicons.css";
 import { useRouter } from "vue-router";
 
 import { ROUTES } from "@/constants/routes";
+import lang from "@/i18n";
 
 export interface ShowHints {
   [key: string]: boolean;

@@ -9,13 +9,28 @@
       <AccordionTab class="audio-generator__accordion-tab" header="Instructions">
         <span>1. Enter the subject (No more than 300 characters)</span>
         <span>2. Select the style, number and size of stanzas;</span>
-        <span>3. Click generate. </span>
+        <span>3. Click generate.</span>
       </AccordionTab>
     </Accordion>
 
-    <div class="audio-generator__input">
+    <div v-if="!voiceValue.language.length" class="audio-generator__input">
       <div class="audio-generator__input-title">Voice Selection</div>
-      <div class="audio-generator__input-value">{{ selectedStyle.title }}</div>
+      <div @click="showPopup(true)" class="audio-generator__input-value">Select style</div>
+    </div>
+
+    <div v-if="voiceValue.language.length" class="audio-generator__input">
+      <div class="audio-generator__input-title">Language</div>
+      <div @click="showPopup(true)" class="audio-generator__input-value">{{ voiceValue.dialect }}</div>
+    </div>
+
+    <div v-if="voiceValue.language.length" class="audio-generator__input">
+      <div class="audio-generator__input-title">Dialect</div>
+      <div @click="showPopup(true)" class="audio-generator__input-value">{{ voiceValue.dialect }}</div>
+    </div>
+
+    <div v-if="voiceValue.language.length" class="audio-generator__input">
+      <div class="audio-generator__input-title">Gender</div>
+      <div @click="showPopup(true)" class="audio-generator__input-value">{{ voiceValue.gender }}</div>
     </div>
 
     <span class="p-input-icon-right audio-generator__subject-input">
@@ -31,7 +46,7 @@
     </div>
 
     <div class="audio-generator__generate-btn btn-neon">Generate</div>
-    <VoiceSelection :visible="isShowPopup" />
+    <VoiceSelection :visible="isShowPopup" @on-change-show-popup="showPopup" @on-voice-select="onVoiceSelect" />
   </div>
 </template>
 
@@ -45,14 +60,35 @@ import VoiceSelection from "@/components/popup/VoiceSelection.vue";
 import { Style } from "@/views/PoemsService.vue";
 
 const selectedStyle = ref<Style>({ title: "Anime", value: "anime" });
-// const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
-//   isShowPopup.value = val.isShowPopup;
-//   if (val.style) {
-//     selectedStyle.value = val.style;
-//   }
-// };
+const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
+  isShowPopup.value = val.isShowPopup;
+  if (val.style) {
+    selectedStyle.value = val.style;
+  }
+};
+
+const voiceValue = ref({
+  language: "",
+  dialect: "",
+  gender: "",
+});
 
 const isShowPopup = ref<boolean>(false);
+
+const showPopup = (val: boolean) => {
+  if (!val) {
+    document.documentElement.style.overflow = "auto";
+  } else {
+    document.documentElement.style.overflow = "hidden";
+  }
+  isShowPopup.value = val;
+};
+
+const onVoiceSelect = (val: any) => {
+  showPopup(false);
+  console.log(val);
+  voiceValue.value = val.val;
+};
 </script>
 
 <style lang="scss" scoped>

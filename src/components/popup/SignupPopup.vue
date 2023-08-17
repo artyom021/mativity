@@ -1,34 +1,56 @@
 <template>
-  <Transition name="bounce">
-    <div v-show="isShowSignupPopup" class="signup-popup">
-      <InputText v-model="email" placeholder="Email" type="text" />
-      <InputText v-model="username" placeholder="Username" type="text" />
-      <InputText v-model="password" placeholder="Password" type="text" />
+  <OnClickOutside @trigger="closePopup">
+    <Transition name="bounce">
+      <div v-show="isShowSignupPopup" class="signup-popup">
+        <InputText v-model="formValues.email" placeholder="Email" type="text" />
+        <InputText v-model="formValues.name" placeholder="Username" type="text" />
+        <InputText v-model="formValues.password" placeholder="Password" type="text" />
 
-      <Checkbox v-model="confirmation" />
-      <div class="signup-popup__warning">
-        By clicking log in, or continuing with the other options below, you agree to Terms of Service and have read the
-        Privacy Policy
+        <Checkbox v-model="confirmation" binary />
+        <div class="signup-popup__warning">
+          By clicking log in, or continuing with the other options below, you agree to Terms of Service and have read
+          the Privacy Policy
+        </div>
+        <div @click="signUp" class="signup-popup__submit-btn btn-neon">SIGN UP</div>
+        <div class="signup-popup__new-to">New to Maxtivity? Sign Up</div>
       </div>
-      <div class="signup-popup__submit-btn btn-neon">SIGN UP</div>
-      <div class="signup-popup__new-to">New to Maxtivity? Sign Up</div>
-    </div>
-  </Transition>
+    </Transition>
+  </OnClickOutside>
 </template>
 
 <script lang="ts" setup>
+import { OnClickOutside } from "@vueuse/components";
 import Checkbox from "primevue/checkbox";
 import InputText from "primevue/inputtext";
 import { ref } from "vue";
+
+import { UserCreate, useUserCreate } from "@/hooks/user/useUserCreate";
+import { useAppStore } from "@/store/app/appStore";
+
+const appStore = useAppStore();
+const { updateSignupPopup } = appStore;
 
 defineProps({
   isShowSignupPopup: Boolean,
 });
 
-const email = ref<string>();
-const password = ref<string>();
-const username = ref<string>();
 const confirmation = ref<boolean>(false);
+
+const formValues = ref<UserCreate>({
+  email: "",
+  name: "",
+  password: "",
+  password_confirm: "",
+});
+
+const closePopup = () => {
+  updateSignupPopup(false);
+};
+
+const signUp = async () => {
+  closePopup();
+  await useUserCreate({ ...formValues.value, password_confirm: formValues.value.password });
+};
 </script>
 
 <style lang="scss" scoped>

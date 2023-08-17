@@ -1,32 +1,58 @@
 <template>
-  <Transition name="bounce">
-    <div v-show="isShowLoginPopup" class="login-popup">
-      <InputText v-model="email" placeholder="Email" type="text" />
-      <InputText v-model="password" placeholder="Password" type="text" />
+  <OnClickOutside @trigger="closePopup">
+    <Transition name="bounce-popup">
+      <div v-show="isShowLoginPopup" class="login-popup">
+        <InputText v-model="loginValues.email" placeholder="Email" type="text" />
+        <InputText v-model="loginValues.password" placeholder="Password" type="text" />
 
-      <div class="login-popup__warning">
-        By clicking log in, or continuing with the other options below, you agree to Terms of Service and have read the
-        Privacy Policy
+        <div class="login-popup__warning">
+          By clicking log in, or continuing with the other options below, you agree to Terms of Service and have read
+          the Privacy Policy
+        </div>
+
+        <div @click="login" class="login-popup__submit-btn btn-neon">LOG IN</div>
+        <div class="login-popup__forgot-password">Forgot you password?</div>
+        <div class="login-popup__new-to">New to Maxtivity? Sign Up</div>
       </div>
-
-      <div class="login-popup__submit-btn btn-neon">LOG IN</div>
-      <div class="login-popup__forgot-password">Forgot you password?</div>
-      <div class="login-popup__new-to">New to Maxtivity? Sign Up</div>
-    </div>
-  </Transition>
+    </Transition>
+  </OnClickOutside>
 </template>
 
 <script lang="ts" setup>
+import { OnClickOutside } from "@vueuse/components";
 import InputText from "primevue/inputtext";
 import { defineEmits, defineProps, ref } from "vue";
 
-defineProps({
+import { useUserCreate } from "@/hooks/user/useUserCreate";
+import { UserLogin, useUserLogin } from "@/hooks/user/useUserLogin";
+import { useAppStore } from "@/store/app/appStore";
+
+const appStore = useAppStore();
+const { updateLoginPopup } = appStore;
+
+const props = defineProps({
   isShowLoginPopup: Boolean,
 });
 
-defineEmits(["cancel", "confirm"]);
+const loginValues = ref<UserLogin>({
+  email: "",
+  password: "",
+});
+
+const closePopup = () => {
+  if (props.isShowLoginPopup) {
+    updateLoginPopup(false);
+  }
+};
+
+defineEmits(["cancel", "confirm", "onClosePopup"]);
 
 const showPopup = ref<boolean>(false);
+
+const login = async () => {
+  closePopup();
+  await useUserLogin(loginValues.value);
+};
 </script>
 
 <style lang="scss" scoped>
