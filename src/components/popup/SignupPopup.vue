@@ -4,13 +4,13 @@
       <div v-show="isShowSignupPopup" class="signup-popup">
         <InputText v-model="formValues.email" placeholder="Email" type="text" />
         <InputText v-model="formValues.name" placeholder="Username" type="text" />
-        <InputText v-model="formValues.password" placeholder="Password" type="text" />
+        <Password v-model="formValues.password" :feedback="false" placeholder="Password" />
 
-        <Checkbox v-model="confirmation" binary />
-        <div class="signup-popup__warning">
-          By clicking log in, or continuing with the other options below, you agree to Terms of Service and have read
-          the Privacy Policy
+        <div class="signup-popup__warning-container">
+          <Checkbox v-model="confirmation" binary />
+          <div class="signup-popup__warning">{{ $lang.message.signUpWarning }}</div>
         </div>
+
         <div @click="signUp" class="signup-popup__submit-btn btn-neon">SIGN UP</div>
         <div class="signup-popup__new-to">New to Maxtivity? Sign Up</div>
       </div>
@@ -22,6 +22,8 @@
 import { OnClickOutside } from "@vueuse/components";
 import Checkbox from "primevue/checkbox";
 import InputText from "primevue/inputtext";
+import Password from "primevue/password";
+// import { useForm } from "vee-validate";
 import { ref } from "vue";
 
 import { UserCreate, useUserCreate } from "@/hooks/user/useUserCreate";
@@ -35,6 +37,10 @@ defineProps({
 });
 
 const confirmation = ref<boolean>(false);
+
+// function defineInputBinds(email1: string) {}
+
+// const email = defineInputBinds("email");
 
 const formValues = ref<UserCreate>({
   email: "",
@@ -83,6 +89,10 @@ const signUp = async () => {
     font-size: 32px;
   }
 
+  &__warning-container {
+    display: flex;
+  }
+
   &__warning {
     color: $grey-6000;
     font-weight: 400;
@@ -99,5 +109,9 @@ const signUp = async () => {
     margin: 0 auto;
     text-decoration: underline;
   }
+}
+
+.signup-popup :deep(.p-password-input) {
+  width: 100%;
 }
 </style>

@@ -1,5 +1,6 @@
 import { useApi } from "@/api";
 import { API_ROUTES } from "@/api/apiRoutes";
+import { useUserStore } from "@/store/app/userStore";
 
 export const MAXTIVITY_TOKEN_KEY = "maxtivity_token";
 
@@ -14,6 +15,8 @@ export const MAXTIVITY_TOKEN_KEY = "maxtivity_token";
 // };
 
 export const getToken = async () => {
+  const userStore = useUserStore();
+  const { updateUser } = userStore;
   // const appStore = useAppStore();
   // const { updateIsLoading } = appStore;
   const { request, data } = useApi<string>({
@@ -23,10 +26,10 @@ export const getToken = async () => {
   // updateIsLoading(true);
   try {
     await request();
-    console.log(data.value);
 
     if (data.value) {
       localStorage.setItem(MAXTIVITY_TOKEN_KEY, data.value);
+      updateUser(data.value);
       return data.value;
     }
   } finally {

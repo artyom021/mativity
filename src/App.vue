@@ -34,7 +34,7 @@ import { useAppStore } from "@/store/app/appStore";
 document.title = "Maxtivity";
 
 onBeforeMount(async () => {
-  await getToken();
+  // await getToken();
 });
 
 const appStore = useAppStore();
@@ -183,5 +183,13 @@ body {
 
 .p-dropdown-panel .p-dropdown-items {
   padding: 0.1rem 0 !important;
+}
+
+.p-inputtext {
+  color: #000 !important;
+}
+
+.p-toast .p-toast-message .p-toast-icon-close:focus {
+  box-shadow: unset !important;
 }
 </style>

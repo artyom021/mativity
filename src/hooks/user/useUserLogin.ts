@@ -3,7 +3,7 @@ import { isArray } from "lodash";
 
 import { RequestMethod, useApi } from "@/api";
 import { API_ROUTES } from "@/api/apiRoutes";
-import { MAXTIVITY_TOKEN_KEY } from "@/hooks/user/useUserRead";
+import { MAXTIVITY_TOKEN_KEY, getToken } from "@/hooks/user/useUserRead";
 import lang from "@/i18n";
 import { useAppStore } from "@/store/app/appStore";
 import { HookConfig } from "@/types/api";
@@ -36,6 +36,7 @@ export const useUserLogin = async <R>(body: UserLogin, config?: HookConfig): Pro
       detail: lang.success.login,
     });
     localStorage.setItem(MAXTIVITY_TOKEN_KEY, data.value.token);
+    await getToken();
   } catch (e) {
     let errorMessage = lang.error.somethingWentWrong;
     if (e instanceof AxiosError) {

@@ -6,15 +6,16 @@ import { MAXTIVITY_TOKEN_KEY } from "@/hooks/user/useUserRead";
 import router from "@/router";
 
 export interface User {
-  email: string;
-  familyName: string;
-  givenName: string;
+  id: string;
+  created_at: string;
   name: string;
-  picture: string;
+  email: string;
+  account_type: string;
 }
 
 export const useUserStore = defineStore("userStore", () => {
   const token = localStorage.getItem(MAXTIVITY_TOKEN_KEY);
+  const user = ref<User | null>(null);
 
   const isUserHaveAccess = ref(true);
   //
@@ -32,7 +33,7 @@ export const useUserStore = defineStore("userStore", () => {
   const apiToken = ref<string | null>(token ? token : null);
 
   const updateUser = (userData: User | null): void => {
-    // user.value = userData;
+    user.value = userData;
   };
 
   const updateApiToken = (token: string | null): void => {
@@ -47,6 +48,7 @@ export const useUserStore = defineStore("userStore", () => {
   return {
     apiToken,
     isUserHaveAccess,
+    user,
 
     updateUser,
     updateApiToken,

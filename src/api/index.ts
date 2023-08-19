@@ -2,6 +2,8 @@ import axios, { AxiosHeaders } from "axios";
 import { stringify } from "qs";
 import { Ref, ref } from "vue";
 
+import { MAXTIVITY_TOKEN_KEY } from "@/hooks/user/useUserRead";
+
 export interface QueryParams {
   [key: string]: unknown;
 }
@@ -55,7 +57,7 @@ export function useApi<T>(config: Config) {
 
     const headers = {
       "Content-type": "application/json; charset=UTF-8",
-      Authorization: `Bearer ${apiToken}`,
+      Authorization: `Bearer ${localStorage.getItem(MAXTIVITY_TOKEN_KEY)}`,
     };
 
     const { body, queryParams } = config;

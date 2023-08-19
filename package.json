@@ -22,6 +22,7 @@
     "primevue": "^3.31.0",
     "qs": "^6.11.0",
     "unoverlay-vue": "^0.3.0",
+    "vee-validate": "^4.11.1",
     "vue": "^3.2.47",
     "vue-router": "^4.0.3"
   },

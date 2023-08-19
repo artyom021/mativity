@@ -3,7 +3,7 @@
     <Transition name="bounce-popup">
       <div v-show="isShowLoginPopup" class="login-popup">
         <InputText v-model="loginValues.email" placeholder="Email" type="text" />
-        <InputText v-model="loginValues.password" placeholder="Password" type="text" />
+        <Password v-model="loginValues.password" :feedback="false" placeholder="Password" />
 
         <div class="login-popup__warning">
           By clicking log in, or continuing with the other options below, you agree to Terms of Service and have read
@@ -21,6 +21,7 @@
 <script lang="ts" setup>
 import { OnClickOutside } from "@vueuse/components";
 import InputText from "primevue/inputtext";
+import Password from "primevue/password";
 import { defineEmits, defineProps, ref } from "vue";
 
 import { useUserCreate } from "@/hooks/user/useUserCreate";
@@ -101,5 +102,9 @@ const login = async () => {
     margin: 0 auto;
     text-decoration: underline;
   }
+}
+
+.login-popup :deep(.p-password-input) {
+  width: 100%;
 }
 </style>

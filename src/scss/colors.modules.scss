@@ -1,4 +1,4 @@
-@import "colors.scss";
+@import "colorsWpp.scss";
 @import "variables.scss";
 
 :export {
@@ -30,29 +30,6 @@
     cat-4: $chart-cat-4;
     cat-2: $chart-cat-2;
     grid: $grey-800;
-  }
-  table: {
-    red: $system-warning;
-    green: $system-success;
-    icon: $grey-500;
-    badge: {
-      regular: {
-        color: $table-badge-regular-text;
-        background: $table-badge-regular-background;
-      }
-      pending: {
-        color: $grey-700;
-        background: $grey-300;
-      }
-      success: {
-        color: $table-badge-success-text;
-        background: $table-badge-success-background;
-      }
-      error: {
-        color: $grey-000;
-        background: $system-warning;
-      }
-    }
   }
   grey: {
     main: $grey-500;
