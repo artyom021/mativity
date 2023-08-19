@@ -16,6 +16,7 @@
         <SignUpPopup :is-show-signup-popup="isShowSignupPopup" />
       </div>
     </div>
+    <PageLoader :is-loading="isLoading" />
   </div>
 </template>
 
@@ -23,22 +24,22 @@
 import { storeToRefs } from "pinia";
 import { onBeforeMount } from "vue";
 
+import PageLoader from "@/components/loaders/PageLoader.vue";
 import PageFooter from "@/components/PageFooter.vue";
 import PageHeader from "@/components/PageHeader.vue";
 import LoginPopup from "@/components/popup/LoginPopup.vue";
 import SignUpPopup from "@/components/popup/SignupPopup.vue";
 import ToastComponent from "@/components/ToastComponent.vue";
-import { getToken } from "@/hooks/user/useUserRead";
 import { useAppStore } from "@/store/app/appStore";
+
+const appStore = useAppStore();
+const { isLoading, isShowLoginPopup, isShowSignupPopup } = storeToRefs(appStore);
 
 document.title = "Maxtivity";
 
 onBeforeMount(async () => {
   // await getToken();
 });
-
-const appStore = useAppStore();
-const { isShowLoginPopup, isShowSignupPopup } = storeToRefs(appStore);
 </script>
 ß
 

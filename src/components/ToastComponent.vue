@@ -117,7 +117,7 @@ watchEffect(() => {
 @import "@/scss/variables.scss";
 
 .p-toast.p-component .p-toast-message .p-toast-message-content {
-  border: 1px solid #01ddeb;
+  border: 1px solid #2a4365;
   border-radius: 8px;
   background: #121114;
   color: #ffffff;
