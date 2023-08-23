@@ -17,6 +17,8 @@ export const useAppStore = defineStore("appStore", () => {
   const isLoading: Ref<boolean> = ref(false);
   const isShowLoginPopup = ref(false);
   const isShowSignupPopup = ref(false);
+  const isShowProfileMenu = ref(false);
+
   const toast = ref<ToastConfig | null>(null);
 
   const updateLanguage = (value: string) => {
@@ -35,6 +37,10 @@ export const useAppStore = defineStore("appStore", () => {
     isShowLoginPopup.value = val;
   };
 
+  const updateProfileMenu = (val: boolean) => {
+    isShowProfileMenu.value = val;
+  };
+
   const updateSignupPopup = (val: boolean) => {
     isShowSignupPopup.value = val;
   };
@@ -49,11 +55,13 @@ export const useAppStore = defineStore("appStore", () => {
     isShowLoginPopup,
     isShowSignupPopup,
     toast,
+    isShowProfileMenu,
 
     showToast,
     updateIsLoading,
     updateLanguage,
     updateLoginPopup,
     updateSignupPopup,
+    updateProfileMenu,
   };
 });

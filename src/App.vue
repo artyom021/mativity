@@ -193,4 +193,25 @@ body {
 .p-toast .p-toast-message .p-toast-icon-close:focus {
   box-shadow: unset !important;
 }
+
+.p-button {
+  background-color: unset !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: $primary-200 !important;
+  background: $primary-200 !important;
+}
+
+.p-checkbox .p-checkbox-box .p-checkbox-icon {
+  color: black !important;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+  border-color: $primary-300;
+}
+
+.p-button:enabled:hover {
+  border-color: $primary-300 !important;
+}
 </style>

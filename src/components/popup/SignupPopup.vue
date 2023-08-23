@@ -11,7 +11,8 @@
           <div class="signup-popup__warning">{{ $lang.message.signUpWarning }}</div>
         </div>
 
-        <div @click="signUp" class="signup-popup__submit-btn btn-neon">SIGN UP</div>
+        <!--        <div @click="signUp" class="signup-popup__submit-btn btn-neon">SIGN UP</div>-->
+        <Button :disabled="!confirmation" @click="signUp" class="signup-popup__submit-btn btn-neon">SIGN UP</Button>
         <div class="signup-popup__new-to">New to Maxtivity? Sign Up</div>
       </div>
     </Transition>
@@ -20,6 +21,7 @@
 
 <script lang="ts" setup>
 import { OnClickOutside } from "@vueuse/components";
+import Button from "primevue/button";
 import Checkbox from "primevue/checkbox";
 import InputText from "primevue/inputtext";
 import Password from "primevue/password";
