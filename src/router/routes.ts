@@ -9,6 +9,7 @@ import ImageService from "@/views/ImageService.vue";
 import ImagesGenerator from "@/views/ImagesGenerator.vue";
 import ParapharsingService from "@/views/ParapharsingService.vue";
 import PoemsService from "@/views/PoemsService.vue";
+import ProfilePage from "@/views/ProfilePage.vue";
 import TextService from "@/views/TextService.vue";
 
 export const FOOTER_LINKS = [
@@ -98,5 +99,34 @@ export const routes: Array<RouteRecordRaw> = [
     path: ROUTES.AUDIO_GENERATOR.PATH,
     name: ROUTES.AUDIO_GENERATOR.NAME,
     component: AudioGenerator,
+  },
+
+  {
+    path: ROUTES.AUDIO_GENERATOR.PATH,
+    name: ROUTES.AUDIO_GENERATOR.NAME,
+    component: AudioGenerator,
+  },
+  {
+    path: ROUTES.PROFILE.PATH,
+    name: ROUTES.PROFILE.NAME,
+    component: ProfilePage,
+  },
+
+  {
+    path: ROUTES.USER_TRANSACTIONS.PATH,
+    name: ROUTES.USER_TRANSACTIONS.NAME,
+    component: HomePage,
+  },
+
+  {
+    path: ROUTES.BUY_NEURONS.PATH,
+    name: ROUTES.BUY_NEURONS.NAME,
+    component: HomePage,
+  },
+
+  {
+    path: ROUTES.LOGOUT.PATH,
+    name: ROUTES.LOGOUT.NAME,
+    component: HomePage,
   },
 ];

@@ -19,11 +19,10 @@
 </template>
 
 <script lang="ts" setup>
+import { useAppStore } from "@/store/app/appStore";
 import { OnClickOutside } from "@vueuse/components";
 import InputText from "primevue/inputtext";
 import { defineEmits, defineProps, ref } from "vue";
-
-import { useAppStore } from "@/store/app/appStore";
 
 const appStore = useAppStore();
 const { updateLoginPopup } = appStore;
@@ -68,12 +67,23 @@ const showPopup = ref<boolean>(false);
     display: flex;
     justify-content: center;
     align-items: center;
+
+    align-items: center;
     cursor: pointer;
+    margin-bottom: 40px;
     border: 2px solid $primary-400;
     border-radius: 12px;
+    border-radius: 12px;
+    background-image: url("~@/assets/png/neon_background.png");
+    background-size: cover;
+    background-color: #000;
+    padding: 0 20px;
+    width: 30%;
     height: 80px;
+    height: 350px;
     font-weight: 600;
     font-size: 32px;
+    text-align: center;
   }
 
   &__warning {

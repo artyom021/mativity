@@ -10,7 +10,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "primevue/resources/primevue.min.css";
-import "primevue/resources/themes/saga-purple/theme.css";
+import "@/scss/_theme.css";
 
 createApp(App)
   .use(store)

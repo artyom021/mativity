@@ -33,7 +33,13 @@
 </template>
 
 <script lang="ts" setup>
-import lang from "@/i18n";
+import { onBeforeMount } from "vue";
+
+import { getUserInfo } from "@/hooks/user/useUserRead";
+
+onBeforeMount(async () => {
+  // await getUserInfo();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -55,6 +61,7 @@ import lang from "@/i18n";
     mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 100%);
     padding-bottom: 50px;
     width: 100%;
+    pointer-events: none;
   }
 
   h1 {

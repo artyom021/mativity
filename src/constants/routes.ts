@@ -77,6 +77,26 @@ export const ROUTES: RoutesType = {
     PATH: "/audio-generator",
     NAME: "audioGenerator",
   },
+
+  PROFILE: {
+    PATH: "/profile",
+    NAME: "profile",
+  },
+
+  USER_TRANSACTIONS: {
+    PATH: "/user-transactions",
+    NAME: "user-transactions",
+  },
+
+  BUY_NEURONS: {
+    PATH: "/buy-neurons",
+    NAME: "buy-neurons",
+  },
+
+  LOGOUT: {
+    PATH: "/logout",
+    NAME: "logout",
+  },
 };
 
 export const ROUTE_MAPPING: { [key: string]: string } = {

@@ -28,8 +28,8 @@ export function useApi(config: Config) {
   const data = ref();
   const response = ref({}) as Ref<ResponseType>;
 
-  const checkToken = async (token: string | null): Promise<void> => {
-    if (!token) {
+  const checkToken = async (apiToken: string | null): Promise<void> => {
+    if (!apiToken) {
       try {
       } catch (e) {}
 

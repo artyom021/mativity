@@ -1,48 +1,46 @@
-import { defineStore, storeToRefs } from "pinia";
+import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { ROUTES } from "@/constants/routes";
-import { MAXTIVITY_TOKEN_KEY } from "@/hooks/user/useUserRead";
-import router from "@/router";
+import { getBalance } from "@/hooks/user/useGetBalance";
+import { MAXTIVITY_TOKEN_KEY, getUserInfo } from "@/hooks/user/useUserRead";
 
 export interface User {
-  id: string;
-  created_at: string;
+  id?: string;
+  created_at?: string;
   name: string;
   email: string;
-  account_type: string;
+  account_type?: string;
+  balance?: string | null;
 }
 
 export const useUserStore = defineStore("userStore", () => {
-  const token = localStorage.getItem(MAXTIVITY_TOKEN_KEY);
+  const apiToken = ref<string | null>(localStorage.getItem(MAXTIVITY_TOKEN_KEY));
+  // getUserInfo().then(r => );
+
   const user = ref<User | null>(null);
 
   const isUserHaveAccess = ref(true);
-  //
-  // const user = ref<User | null>(
-  //   userData
-  //     ? {
-  //         email: userData?.email,
-  //         familyName: userData?.family_name,
-  //         givenName: userData?.given_name,
-  //         name: userData?.name,
-  //         picture: userData?.picture,
-  //       }
-  //     : null
-  // );
-  const apiToken = ref<string | null>(token ? token : null);
 
   const updateUser = (userData: User | null): void => {
     user.value = userData;
   };
 
-  const updateApiToken = (token: string | null): void => {
-    token ? localStorage.setItem(MAXTIVITY_TOKEN_KEY, token) : localStorage.removeItem(MAXTIVITY_TOKEN_KEY);
-    apiToken.value = token;
+  const updateApiToken = (apiToken: string | null): void => {
+    apiToken ? localStorage.setItem(MAXTIVITY_TOKEN_KEY, apiToken) : localStorage.removeItem(MAXTIVITY_TOKEN_KEY);
   };
 
   const updateUserAccess = (isHaveAccess: boolean) => {
     isUserHaveAccess.value = isHaveAccess;
+  };
+
+  const setUserBalance = (userBalance: string) => {
+    if (user.value) {
+      user.value.balance = userBalance;
+    }
+  };
+
+  const getUserBalance = () => {
+    return user.value?.balance || "0";
   };
 
   return {
@@ -53,5 +51,7 @@ export const useUserStore = defineStore("userStore", () => {
     updateUser,
     updateApiToken,
     updateUserAccess,
+    setUserBalance,
+    getUserBalance,
   };
 });

@@ -1,38 +1,33 @@
 import { useApi } from "@/api";
 import { API_ROUTES } from "@/api/apiRoutes";
-import { useUserStore } from "@/store/app/userStore";
+import { getBalance } from "@/hooks/user/useGetBalance";
+import { useAppStore } from "@/store/app/appStore";
+import { User, useUserStore } from "@/store/app/userStore";
 
 export const MAXTIVITY_TOKEN_KEY = "maxtivity_token";
 
-// const checkToken = (token: string | null): boolean => {
-//   if (!token) {
-//     return false;
-//   }
-//
-//   const decodedToken = decodeCredential(token) as Record<string, string>;
-//   const expiresIn = Number(decodedToken.expires_in);
-//   return Number(decodedToken.created_at) + expiresIn >= Date.now() - OFFSET_TIME;
-// };
-
-export const getToken = async () => {
+export const getUserInfo = async (): Promise<User | null> => {
   const userStore = useUserStore();
-  const { updateUser } = userStore;
-  // const appStore = useAppStore();
-  // const { updateIsLoading } = appStore;
+  const { updateUser, updateUserAccess } = userStore;
+  const appStore = useAppStore();
+
+  const { updateIsLoading } = appStore;
   const { request, data } = useApi<string>({
     path: API_ROUTES.ME as string,
   });
 
-  // updateIsLoading(true);
+  updateIsLoading(true);
+
   try {
     await request();
 
     if (data.value) {
-      localStorage.setItem(MAXTIVITY_TOKEN_KEY, data.value);
-      updateUser(data.value);
-      return data.value;
+      updateUser({ name: data.value.name, email: data.value.email });
+      await getBalance();
+      updateUserAccess(true);
     }
   } finally {
-    // updateIsLoading(false);
+    updateIsLoading(false);
   }
+  return null;
 };
