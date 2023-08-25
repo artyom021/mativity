@@ -25,9 +25,11 @@ export const getUserInfo = async (): Promise<User | null> => {
       updateUser({ name: data.value.name, email: data.value.email });
       await getBalance();
       updateUserAccess(true);
+      return data.value;
     }
   } finally {
     updateIsLoading(false);
   }
+  updateUserAccess(false);
   return null;
 };

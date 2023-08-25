@@ -30,6 +30,7 @@ import PageHeader from "@/components/PageHeader.vue";
 import LoginPopup from "@/components/popup/LoginPopup.vue";
 import SignUpPopup from "@/components/popup/SignupPopup.vue";
 import ToastComponent from "@/components/ToastComponent.vue";
+import { getUserInfo } from "@/hooks/user/useUserRead";
 import { useAppStore } from "@/store/app/appStore";
 
 const appStore = useAppStore();
@@ -38,7 +39,7 @@ const { isLoading, isShowLoginPopup, isShowSignupPopup } = storeToRefs(appStore)
 document.title = "Maxtivity";
 
 onBeforeMount(async () => {
-  // await getToken();
+  await getUserInfo();
 });
 </script>
 ß
