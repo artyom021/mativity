@@ -11,6 +11,7 @@ import ParapharsingService from "@/views/ParapharsingService.vue";
 import PoemsService from "@/views/PoemsService.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
 import TextService from "@/views/TextService.vue";
+import UserTransactions from "@/views/UserTransactions.vue";
 
 export const FOOTER_LINKS = [
   {
@@ -115,7 +116,7 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: ROUTES.USER_TRANSACTIONS.PATH,
     name: ROUTES.USER_TRANSACTIONS.NAME,
-    component: HomePage,
+    component: UserTransactions,
   },
 
   {

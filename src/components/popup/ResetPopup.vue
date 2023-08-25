@@ -21,12 +21,8 @@ import Password from "primevue/password";
 import { defineEmits, defineProps, ref } from "vue";
 
 import { useUserReset } from "@/hooks/user/useUserResetPass";
-import { useAppStore } from "@/store/app/appStore";
 
-const appStore = useAppStore();
-const { updateLoginPopup } = appStore;
-
-const props = defineProps({
+defineProps({
   isShowResetPopup: Boolean,
 });
 
@@ -35,17 +31,14 @@ const resetValues = ref({
   password_confirm: "",
 });
 
-const closePopup = async () => {
-  // if (props.isShowResetPopup) {
-  //   updateLoginPopup(true);
-  // }
+const closePopup = () => {
+  emit("onPopupClose", false);
 };
 
-const emit = defineEmits(["cancel", "confirm", "openResetPopup"]);
+const emit = defineEmits(["cancel", "confirm", "openResetPopup", "onPopupClose"]);
 
 const openResetPopup = async () => {
-  console.log("openReset");
-  emit("openResetPopup", true);
+  emit("onPopupClose", false);
   await useUserReset({ ...resetValues.value });
 };
 </script>
@@ -80,7 +73,6 @@ const openResetPopup = async () => {
     margin-top: 40px;
     border: 2px solid $primary-400;
     border-radius: 12px;
-    background-image: url("~@/assets/png/neon_background.png");
     background-size: cover;
     background-color: #000;
     padding: 0 20px;

@@ -6,4 +6,5 @@ export const API_ROUTES: ApiRoutes = {
   LOGIN: "/login",
   GET_BALANCE: "/get-balance",
   CHANGE_PASSWORD: "/change-password",
+  GET_TRANSACTIONS: "/get-my-transactions",
 };

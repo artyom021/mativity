@@ -38,15 +38,19 @@
       <InputText v-model="value2" placeholder="Enter Subject" />
     </span>
 
-    <div class="audio-generator__generation">
+    <div v-if="!audioGenerated" class="audio-generator__generation">
       <div class="audio-generator__generation-title">1 Generation</div>
       <div class="audio-generator__generation-value">
         <img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 20
       </div>
     </div>
 
-    <div class="audio-generator__generate-btn btn-neon">Generate</div>
+    <div v-if="!audioGenerated" @click="handleGenerate" class="audio-generator__generate-btn btn-neon">Generate</div>
     <VoiceSelection :visible="isShowPopup" @on-change-show-popup="showPopup" @on-voice-select="onVoiceSelect" />
+    <div v-if="audioGenerated" class="audio-generator__player">
+      <AudioPlayer />
+      <div class="audio-generator__download">DOWNLOAD</div>
+    </div>
   </div>
 </template>
 
@@ -56,10 +60,13 @@ import AccordionTab from "primevue/accordiontab";
 import InputText from "primevue/inputtext";
 import { ref } from "vue";
 
+import AudioPlayer from "@/components/customComponents/AudioPlayer.vue";
 import VoiceSelection from "@/components/popup/VoiceSelection.vue";
 import { Style } from "@/views/PoemsService.vue";
 
 const selectedStyle = ref<Style>({ title: "Anime", value: "anime" });
+
+const audioGenerated = ref<boolean>(false);
 const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
   isShowPopup.value = val.isShowPopup;
   if (val.style) {
@@ -88,6 +95,10 @@ const onVoiceSelect = (val: any) => {
   showPopup(false);
   console.log(val);
   voiceValue.value = val.val;
+};
+
+const handleGenerate = () => {
+  audioGenerated.value = true;
 };
 </script>
 
@@ -126,6 +137,35 @@ const onVoiceSelect = (val: any) => {
   .p-icon {
     order: 1;
     color: white;
+  }
+
+  &__player {
+    margin-top: 30px;
+    border: 2px solid $primary-900;
+    border-radius: 8px;
+    padding: 30px;
+    padding-top: 0;
+    width: 100%;
+  }
+
+  &__download {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 40px;
+    border: 2px solid $primary-400;
+    border-radius: 12px;
+    background-size: cover;
+    background-color: #000;
+    padding: 0 20px;
+    width: 400px;
+    height: 80px;
+    font-weight: 600;
+    font-size: 32px;
+    text-align: center;
   }
 
   &__input {
@@ -205,6 +245,7 @@ const onVoiceSelect = (val: any) => {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     margin-top: 20px;
     margin-bottom: 45px;
     border: 2px solid $primary-400;

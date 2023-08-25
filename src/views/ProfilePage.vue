@@ -7,10 +7,10 @@
       <div class="profile__block">
         <span class="profile__block-name">Password:</span
         ><CircleIcon /><CircleIcon /><CircleIcon /><CircleIcon /><CircleIcon /><CircleIcon />
-        <span @click="openResetPopup" class="profile__reset-password">Reset</span>
+        <span @click="handleResetPopup" class="profile__reset-password">Reset</span>
       </div>
     </div>
-    <ResetPopup :is-show-reset-popup="isShowResetPopup" />
+    <ResetPopup :is-show-reset-popup="isShowResetPopup" @onPopupClose="handleResetPopup" />
   </div>
 </template>
 
@@ -26,7 +26,7 @@ const { user } = storeToRefs(userStore);
 
 const isShowResetPopup = ref<boolean>(false);
 
-const openResetPopup = (value: boolean) => {
+const handleResetPopup = (value: boolean) => {
   isShowResetPopup.value = value;
 };
 </script>

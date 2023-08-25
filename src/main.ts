@@ -1,8 +1,10 @@
+import IllestWaveform from "1llest-waveform-vue";
 import PrimeVue from "primevue/config";
 import ConfirmationService from "primevue/confirmationservice";
 import ToastService from "primevue/toastservice";
 import unoverlay from "unoverlay-vue";
 import { createApp } from "vue";
+import "1llest-waveform-vue/lib/style.css";
 
 import i18nPlugin from "@/plugins/i18nPlugin";
 
@@ -20,4 +22,5 @@ createApp(App)
   .use(unoverlay)
   .use(ConfirmationService)
   .use(ToastService)
+  .use(IllestWaveform)
   .mount("#app");
