@@ -51,6 +51,7 @@
       <div @click="seek" class="player-seeker" title="Seek"></div>
     </div>
   </div>
+  <PageLoader :is-loading="!ready" />
 </template>
 
 <script lang="ts" setup>
@@ -60,6 +61,8 @@ import { Ref, computed, onMounted, reactive, ref, watchEffect } from "vue";
 
 import "1llest-waveform-vue/lib/style.css";
 import ReplayIcon from "@/components/icons/ReplayIcon.vue";
+import PageLoader from "@/components/loaders/PageLoader.vue";
+
 const waveOptions = reactive<IllestWaveformProps>({
   url: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Louis-Emmanuel_Jadin_-_Nocturne_No._3_in_G_minor_-_2._Allegro_molto.ogg",
 });
@@ -89,7 +92,7 @@ const progressStyle = computed(() => {
 });
 
 const dotStyle = computed(() => {
-  return { left: `${percentComplete.value - 2}%` };
+  return { left: `${percentComplete.value - 1}%` };
 });
 
 const init = ref(false);

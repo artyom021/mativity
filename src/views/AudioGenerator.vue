@@ -49,12 +49,13 @@
     <VoiceSelection :visible="isShowPopup" @on-change-show-popup="showPopup" @on-voice-select="onVoiceSelect" />
     <div v-if="audioGenerated" class="audio-generator__player">
       <AudioPlayer />
-      <div class="audio-generator__download">DOWNLOAD</div>
+      <div @click="download" class="audio-generator__download">DOWNLOAD</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import axios from "axios";
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
 import InputText from "primevue/inputtext";
@@ -99,6 +100,23 @@ const onVoiceSelect = (val: any) => {
 
 const handleGenerate = () => {
   audioGenerated.value = true;
+};
+
+const download = () => {
+  axios
+    .get(
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Louis-Emmanuel_Jadin_-_Nocturne_No._3_in_G_minor_-_2._Allegro_molto.ogg",
+      { responseType: "blob" }
+    )
+    .then((response) => {
+      const blob = new Blob([response.data], { type: "audio/mpeg" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "label";
+      link.click();
+      URL.revokeObjectURL(link.href);
+    })
+    .catch(console.error);
 };
 </script>
 
