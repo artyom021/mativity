@@ -2,10 +2,10 @@
   <div>
     <Dialog
       v-model:visible="isShowPopup"
-      :closable="false"
-      :style="{ width: '50vw' }"
+      :style="{ width: '65vw' }"
       @hide="onPopupHide"
       class="style-popup-container"
+      closable
       header="Choose a style:"
       modal
     >
@@ -55,7 +55,7 @@ const isShowPopup = computed({
 .style-popup {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
 
   &__item {

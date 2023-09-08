@@ -11,8 +11,7 @@ import i18nPlugin from "@/plugins/i18nPlugin";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "primevue/resources/primevue.min.css";
-import "@/scss/_theme.css";
+import "@/scss/themenew.css";
 
 createApp(App)
   .use(store)

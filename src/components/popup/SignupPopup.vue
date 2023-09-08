@@ -13,7 +13,7 @@
 
         <!--        <div @click="signUp" class="signup-popup__submit-btn btn-neon">SIGN UP</div>-->
         <Button :disabled="!confirmation" @click="signUp" class="signup-popup__submit-btn btn-neon">SIGN UP</Button>
-        <div class="signup-popup__new-to">New to Maxtivity? Sign Up</div>
+        <div @click="onActivateLoginPopup" class="signup-popup__new-to">Already have an account? Login</div>
       </div>
     </Transition>
   </OnClickOutside>
@@ -32,7 +32,7 @@ import { UserCreate, useUserCreate } from "@/hooks/user/useUserCreate";
 import { useAppStore } from "@/store/app/appStore";
 
 const appStore = useAppStore();
-const { updateSignupPopup } = appStore;
+const { updateSignupPopup, updateLoginPopup } = appStore;
 
 defineProps({
   isShowSignupPopup: Boolean,
@@ -58,6 +58,11 @@ const closePopup = () => {
 const signUp = async () => {
   closePopup();
   await useUserCreate({ ...formValues.value, password_confirm: formValues.value.password });
+};
+
+const onActivateLoginPopup = () => {
+  closePopup();
+  setTimeout(() => updateLoginPopup(true), 500);
 };
 </script>
 
@@ -108,6 +113,7 @@ const signUp = async () => {
   }
 
   &__new-to {
+    cursor: pointer;
     margin: 0 auto;
     text-decoration: underline;
   }

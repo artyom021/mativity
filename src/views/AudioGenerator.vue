@@ -35,7 +35,7 @@
 
     <span class="p-input-icon-right audio-generator__subject-input">
       <i class="pi pi pi-pencil" />
-      <InputText v-model="value2" placeholder="Enter Subject" />
+      <TextArea v-model="subject" placeholder="Enter Subject" />
     </span>
 
     <div v-if="!audioGenerated" class="audio-generator__generation">
@@ -58,10 +58,10 @@
 import axios from "axios";
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-import InputText from "primevue/inputtext";
+import TextArea from "primevue/textarea";
 import { ref } from "vue";
 
-import AudioPlayer from "@/components/customComponents/AudioPlayer.vue";
+import AudioPlayer from "@/components/customComponents/audio/AudioPlayer.vue";
 import VoiceSelection from "@/components/popup/VoiceSelection.vue";
 import { Style } from "@/views/PoemsService.vue";
 
@@ -81,6 +81,8 @@ const voiceValue = ref({
   gender: "",
 });
 
+const subject = ref("");
+
 const isShowPopup = ref<boolean>(false);
 
 const showPopup = (val: boolean) => {
@@ -92,10 +94,10 @@ const showPopup = (val: boolean) => {
   isShowPopup.value = val;
 };
 
-const onVoiceSelect = (val: any) => {
+const onVoiceSelect = () => {
   showPopup(false);
-  console.log(val);
-  voiceValue.value = val.val;
+  // console.log(val);
+  // voiceValue.value = val.val;
 };
 
 const handleGenerate = () => {
@@ -218,10 +220,10 @@ const download = () => {
   &__subject-input {
     margin-top: 34px;
     width: 100%;
-    height: 74px;
+    height: auto;
     .p-inputtext {
       width: 100%;
-      height: 74px;
+      height: auto;
     }
   }
 

@@ -5,4 +5,8 @@ export default <Lang>{
   login: "Login Successfully",
   logout: "Logged out successfully",
   resetPassword: "Password was successfully reset",
+  poem: "Poem created successfully",
+  textParaphrased: "Text paraphrased successfully",
+  creativeText: "Creative text created successfully",
+  imageGenerated: "Image generated successfully",
 };

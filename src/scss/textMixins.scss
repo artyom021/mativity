@@ -1,0 +1,33 @@
+@import "topography";
+@import "colors";
+@import "variables";
+@import "colorVariables.scss";
+
+@mixin input-group-title {
+  @include typography-m-strong;
+  color: $grey-7000;
+}
+
+@mixin input-title {
+  @include typography-s-midi;
+  color: $grey-7000;
+}
+
+@mixin textarea-title {
+  @include typegraphy-s-midi;
+}
+
+@mixin select-title {
+  margin-bottom: $space-tiny;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include input-title;
+}
+
+@mixin secondary-title {
+  color: $secondary-title-color;
+  margin-bottom: $space-small;
+  @include typography-m-strong;
+}

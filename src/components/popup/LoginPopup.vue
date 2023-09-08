@@ -12,7 +12,7 @@
 
         <div @click="login" class="login-popup__submit-btn btn-neon">LOG IN</div>
         <div class="login-popup__forgot-password">Forgot you password?</div>
-        <div class="login-popup__new-to">New to Maxtivity? Sign Up</div>
+        <div @click="onActivateSignupPopup" class="login-popup__new-to">New to Maxtivity? Sign Up</div>
       </div>
     </Transition>
   </OnClickOutside>
@@ -29,7 +29,7 @@ import { UserLogin, useUserLogin } from "@/hooks/user/useUserLogin";
 import { useAppStore } from "@/store/app/appStore";
 
 const appStore = useAppStore();
-const { updateLoginPopup } = appStore;
+const { updateLoginPopup, updateSignupPopup } = appStore;
 
 const props = defineProps({
   isShowLoginPopup: Boolean,
@@ -53,6 +53,11 @@ const showPopup = ref<boolean>(false);
 const login = async () => {
   closePopup();
   await useUserLogin(loginValues.value);
+};
+
+const onActivateSignupPopup = () => {
+  closePopup();
+  setTimeout(() => updateSignupPopup(true), 500);
 };
 </script>
 
@@ -99,6 +104,7 @@ const login = async () => {
   }
 
   &__new-to {
+    cursor: pointer;
     margin: 0 auto;
     text-decoration: underline;
   }

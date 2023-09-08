@@ -8,4 +8,8 @@ export default <Lang>{
     "            the Privacy Policy",
   logout: "Logout",
   reset: "Reset Password",
+  createPoem: "Create Poem",
+  paraphrase: "Paraphrase",
+  Creative: "Creative",
+  Image: "Image",
 };

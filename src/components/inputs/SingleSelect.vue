@@ -1,14 +1,26 @@
 <template>
-  <Dropdown :model-value="modelValue" :options="items" optionLabel="label" panelClass="dropdown-poems" />
+  <Dropdown
+    :model-value="modelValue"
+    :options="items"
+    @update:modelValue="updateStyle"
+    optionLabel="label"
+    panelClass="dropdown-poems"
+  />
 </template>
 
 <script lang="ts" setup>
 import Dropdown from "primevue/dropdown";
 
-const props = defineProps({
+defineProps({
   items: Array,
   modelValue: Object,
 });
+
+const emit = defineEmits(["updateStyle"]);
+
+const updateStyle = (event: number) => {
+  emit("updateStyle", event);
+};
 </script>
 
 <style lang="scss">
@@ -25,7 +37,7 @@ const props = defineProps({
   justify-content: center !important;
   align-items: center !important;
   margin: auto 0 !important;
-  padding-left: 20px !important;
+  //padding-left: 20px !important;
   color: white !important;
   text-align: center !important;
 }

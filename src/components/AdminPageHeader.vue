@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header__container">
-      <div class="header__left-block">
+      <div class="header__left-container">
         <div class="header__company">
           <img :src="require(`@/assets/png/eye_logo_small.png`)" alt="Logo" />
           <img :src="require(`@/assets/svg/Mativity.svg`)" alt="Mativity" />
@@ -17,48 +17,13 @@
           </div>
         </div>
       </div>
-
-      <div class="header__links">
-        <div v-for="link in HEADER_LINKS" :key="link.name" class="header__link">
-          <StyledIcon
-            :color="isCurrentRoute(link.name) ? '#08ECEC' : '#646464'"
-            :icon="link.name"
-            @click="onChangeRoute(link.link)"
-            class="icons"
-          />
-        </div>
-      </div>
-
-      <div class="header__profile-actions">
-        <div
-          v-if="!isUserHaveAccess"
-          :class="{ 'active-popup': isShowLoginPopup }"
-          @click="openLoginPopup"
-          class="header__profile-action"
-        >
-          LOGIN
-        </div>
-        <div
-          v-if="!isUserHaveAccess"
-          :class="{ 'active-popup': isShowSignupPopup }"
-          @click="openSignupPopup"
-          class="header__profile-action"
-        >
-          SIGN UP
-        </div>
-
-        <div v-if="isUserHaveAccess" class="header__user-balance">
-          <span class="header__balance">{{ showUserBalance }}</span>
-          <StyledIcon class="icons" icon="Currency" />
-        </div>
-
-        <div v-if="isUserHaveAccess" class="header__profile-menu">
-          <BurgerIcon />
-        </div>
+      <div class="header__right-container">
+        <div class="header__user-name"></div>
+        <div class="header__logout-btn">LOG OUT</div>
       </div>
     </div>
-    <img :src="require(`@/assets/png/top_neon.png`)" alt="Neon" class="header__neon-bg" />
   </div>
+  <img :src="require(`@/assets/png/top_neon.png`)" alt="Neon" class="header__neon-bg" />
   <LanguagePopup
     :is-show-language-menu="isShowLanguageMenu"
     :offset-left="offsetLeft"
@@ -95,10 +60,6 @@ const { updateLanguage, updateLoginPopup, updateSignupPopup } = appStore;
 
 const isShowLanguageMenu = ref(false);
 
-const isCurrentRoute = (routeName: string) => {
-  return routeName.toLowerCase() === ROUTE_MAPPING[route.name as string];
-};
-
 const offsetLeft = ref(0);
 
 const toggleLanguageMenu = () => {
@@ -108,35 +69,10 @@ const toggleLanguageMenu = () => {
   isShowLanguageMenu.value = !isShowLanguageMenu.value;
 };
 
-// const toggleUserProfileMenu = () => {
-//   console.log("111");
-//   isShowProfileMenu.value = !isShowProfileMenu.value;
-// };
-
 const onChangeLanguage = (language: string) => {
   isShowLanguageMenu.value = false;
   updateLanguage(language);
 };
-
-const onChangeRoute = (routeLink: string) => {
-  router.push({ path: routeLink });
-};
-
-const openLoginPopup = () => {
-  if (!isShowLoginPopup.value) {
-    updateLoginPopup(true);
-  }
-};
-
-const openSignupPopup = () => {
-  if (!isShowSignupPopup.value) {
-    updateSignupPopup(true);
-  }
-};
-
-const showUserBalance = computed<string>(() => {
-  return getUserBalance();
-});
 </script>
 
 <style lang="scss">
@@ -155,6 +91,12 @@ const showUserBalance = computed<string>(() => {
     height: 100px;
   }
 
+  &__left-container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+
   &__company {
     display: flex;
     align-items: center;
@@ -165,35 +107,6 @@ const showUserBalance = computed<string>(() => {
     width: 30px;
   }
 
-  &__links {
-    display: flex;
-    justify-content: space-between;
-    width: 33%;
-  }
-
-  &__link {
-    cursor: pointer;
-    img path {
-      fill: white;
-    }
-  }
-
-  &__profile-actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 80px;
-  }
-
-  &__profile-action {
-    fill: white;
-    cursor: pointer;
-    border-bottom: 2px solid black;
-    color: $primary-100;
-    font-weight: 600;
-    font-size: 20px;
-    letter-spacing: 2px;
-  }
-
   &__neon-bg {
     position: absolute;
     z-index: 1;
@@ -201,28 +114,14 @@ const showUserBalance = computed<string>(() => {
     width: 100%;
   }
 
-  .active-popup {
-    border-bottom: 2px solid #00cdcd;
-  }
-
-  &__user-balance {
-    display: flex;
-    align-items: center;
-  }
-
-  &__balance {
-    padding-right: 36px;
-  }
-
-  &__profile-menu {
-    display: flex;
-    align-items: flex-end;
-  }
-
-  &__left-block {
-    display: flex;
-    align-items: center;
-    gap: 120px;
+  &__logout-btn {
+    fill: white;
+    cursor: pointer;
+    border-bottom: 2px solid black;
+    color: $primary-100;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 2px;
   }
 }
 </style>

@@ -15,7 +15,7 @@ export type UserLogin = {
   password: string;
 };
 
-export const useUserLogin = async <R>(body: UserLogin, config?: HookConfig): Promise<void> => {
+export const useUserLogin = async <R>(body: UserLogin, config?: HookConfig): Promise<string | null> => {
   const appStore = useAppStore();
   const { updateIsLoading, showToast } = appStore;
 
@@ -46,6 +46,7 @@ export const useUserLogin = async <R>(body: UserLogin, config?: HookConfig): Pro
 
     await getUserInfo();
     updateUserAccess(true);
+    return data.value.token;
   } catch (e) {
     let errorMessage = lang.error.somethingWentWrong;
     if (e instanceof AxiosError) {
@@ -56,6 +57,7 @@ export const useUserLogin = async <R>(body: UserLogin, config?: HookConfig): Pro
       severity: ToastSeverity.Error,
       detail: errorMessage,
     });
+    return null;
   } finally {
     if (!config?.noLoader) {
       updateIsLoading(false);

@@ -15,62 +15,101 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <SingleSelect :modelValue="selectedStyle" :options="poemStyles" class="dropdown-poems" optionLabel="label" />
+      <SingleSelect
+        :items="styleOptionsPrepared"
+        :modelValue="selectedStyle"
+        @updateStyle="updateStyle"
+        class="dropdown-poems"
+        optionLabel="label"
+        optionValue="value"
+      />
     </div>
 
     <div class="poems__input">
       <div class="poems__input-title">Stanza Size</div>
-      <div class="poems__input-value">10</div>
+      <InputNumber v-model="stanzaSize" :max="20" :min="1" class="poems__input-number" inputId="minmax" />
     </div>
 
     <div class="poems__input">
       <div class="poems__input-title">Stanza Count</div>
-      <div class="poems__input-value">10</div>
+      <InputNumber v-model="stanzaCount" :max="20" :min="1" class="poems__input-number" inputId="minmax" />
     </div>
 
-    <span class="p-input-icon-right poems__subject-input">
+    <div class="p-input-icon-right poems__subject-input">
       <i class="pi pi pi-pencil" />
-      <InputText v-model="value2" placeholder="Enter Subject" />
-    </span>
+      <TextArea v-model="subject" placeholder="Enter Subject" />
+    </div>
+
+    <div class="poems__subject-input">
+      <TextArea v-if="generatedPoem" v-model="generatedPoem" :disabled="subject.length >= 300" auto-resize />
+    </div>
 
     <div class="poems__generation">
       <div class="poems__generation-title">1 Generation</div>
       <div class="poems__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 10</div>
     </div>
 
-    <div class="poems__generate-btn btn-neon">Generate</div>
-    <StylePopup :styles="styleOptions" :visible="isShowPopup" @on-change-show-popup="onPopupHide" />
+    <div :class="{ 'btn-disabled': !subject.length }" @click="onGenerate" class="poems__generate-btn btn-neon">
+      Generate
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-import InputText from "primevue/inputtext";
-import { ref } from "vue";
+import InputNumber from "primevue/inputnumber";
+import TextArea from "primevue/textarea";
+import { computed, onBeforeMount, ref } from "vue";
 
 import SingleSelect from "@/components/inputs/SingleSelect.vue";
-import StylePopup from "@/components/popup/StylePopup.vue";
-import { poemStyles } from "@/settings/textSettings";
+import { StyleApi, getStyles } from "@/hooks/chatGpt/useStylesRead";
+import { useVerseCreate } from "@/hooks/chatGpt/useVerseCreate";
+
 export interface Style {
   label: string;
   value: string;
 }
+const subject = ref<string>("");
+const stanzaSize = ref<number>(1);
+const stanzaCount = ref<number>(1);
 
-const selectedStyle = ref<Style>({ label: "Fable", value: "fable" });
-const onPopupHide = (val: { style: Style; isShowPopup: boolean }) => {
-  isShowPopup.value = val.isShowPopup;
-  if (val.style) {
-    selectedStyle.value = val.style;
+const styleOptions = ref<StyleApi[]>([]);
+const generatedPoem = ref<string | null>();
+
+onBeforeMount(async () => {
+  styleOptions.value = await getStyles();
+});
+
+const styleOptionsPrepared = computed(() => {
+  if (styleOptions.value.length) {
+    return styleOptions.value.map((style: StyleApi) => {
+      const capitalized = style.style.charAt(0).toUpperCase() + style.style.slice(1);
+      return {
+        label: capitalized,
+        value: style.id,
+      };
+    });
+  } else {
+    return [];
   }
+});
+
+const selectedStyle = ref(1);
+
+const updateStyle = (val: number) => {
+  selectedStyle.value = val;
 };
 
-const isShowPopup = ref<boolean>(false);
+const onGenerate = async () => {
+  const body = {
+    theme: subject.value,
+    styleId: selectedStyle.value,
+    stanzaSize: stanzaCount.value,
+    stanzaCount: stanzaCount.value,
+  };
 
-const menu = ref();
-
-const toggle = (event) => {
-  menu.value.toggle(event);
+  generatedPoem.value = await useVerseCreate(body);
 };
 </script>
 
@@ -98,6 +137,10 @@ const toggle = (event) => {
     padding-top: 48px;
     padding-bottom: 34px;
     width: 100%;
+  }
+
+  &__input-number {
+    width: 50% !important;
   }
 }
 </style>
@@ -147,10 +190,10 @@ const toggle = (event) => {
   &__subject-input {
     margin-top: 34px;
     width: 100%;
-    height: 74px;
+    height: auto;
     .p-inputtext {
       width: 100%;
-      height: 74px;
+      height: auto;
     }
   }
 
@@ -250,5 +293,17 @@ const toggle = (event) => {
 
 .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
   box-shadow: inset 0 0 0 0.1rem $primary-100 !important;
+}
+
+.poems__input-number .p-inputtext {
+  margin-right: 0;
+  background: linear-gradient(
+    106deg,
+    rgba(0, 47, 111, 1) 0%,
+    rgba(13, 129, 136, 1) 49%,
+    rgba(0, 47, 111, 1) 100%
+  ) !important;
+  width: 50%;
+  text-align: center !important;
 }
 </style>

@@ -15,11 +15,10 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Themes</div>
-      <!--      <PanelMenu v-model:expandedKeys="expandedKeys" :model="items" @update:expandedKeys="closePanel" class="w-full" />-->
       <TreeSelect
         v-model="selectedValue"
         :options="items"
-        metaKeySelection
+        @update:modelValue="onUpdate"
         placeholder="Select Theme"
         selection-mode="single"
       >
@@ -29,26 +28,30 @@
       </TreeSelect>
     </div>
 
+    <div class="p-input-icon-right poems__subject-input">
+      <TextArea v-if="generatedCreative" v-model="generatedCreative" auto-resize />
+    </div>
+
     <div class="poems__generation">
       <div class="poems__generation-title">1 Generation</div>
       <div class="poems__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 10</div>
     </div>
 
-    <div class="poems__generate-btn btn-neon">Generate</div>
+    <div @click="onGenerate" class="poems__generate-btn btn-neon">Generate</div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-// import PanelMenu from "primevue/panelmenu";
+import TextArea from "primevue/textarea";
 import TreeSelect from "primevue/treeselect";
 import { ref } from "vue";
 
-const selectedTheme = ref<string>("Select Theme");
-const expandedKeys = ref({});
+import { useCreativeCreate } from "@/hooks/chatGpt/useCreativeCreate";
 
-const selectedValue = ref(null);
+const selectedTheme = ref<number>(1);
+const generatedCreative = ref<string>();
 
 const items = [
   {
@@ -58,88 +61,23 @@ const items = [
     leaf: true,
     children: [
       {
-        key: "0_0",
-        label: "Idea 1",
-        data: "idea",
-        command: () => {
-          selectedTheme.value = "Idea 1";
-          expandedKeys.value = {};
-        },
-      },
-      {
-        key: "0_1",
-        label: "Idea 2",
-        data: "idea",
-        command: () => {
-          selectedTheme.value = "Idea 2";
-        },
-      },
-    ],
-  },
-  {
-    key: "1",
-    label: "Ideas for a Gift",
-    selectable: false,
-    children: [
-      {
-        key: "1_0",
-        label: "Idea 1",
-      },
-      {
-        key: "1_1",
-        label: "Idea 2",
-      },
-    ],
-  },
-  {
-    label: "What to do in your free time",
-    key: "2",
-    selectable: false,
-    children: [
-      {
-        key: "2_0",
-        label: "Idea 1",
-      },
-      {
-        key: "2_1",
-        label: "Idea 2",
-      },
-    ],
-  },
-  {
-    label: "An idea for sports",
-    key: "3",
-    selectable: false,
-    children: [
-      {
-        label: "Idea 1",
-        key: "3_0",
-      },
-      {
-        key: "3_1",
-        label: "Idea 2",
-      },
-    ],
-  },
-  {
-    label: "What to do on vacation",
-    key: "4",
-    selectable: false,
-    children: [
-      {
-        label: "Idea 1",
-        key: "4_0",
-      },
-      {
-        label: "Idea 2",
-        key: "4_1",
+        key: 1,
+        label: "Self-service coffee shop",
+        data: 1,
+        selectable: true,
       },
     ],
   },
 ];
 
-const closePanel = (val: any) => {
-  console.log(1111);
+const onUpdate = (val: any) => {
+  console.log(Object.keys(val)[0]);
+
+  selectedTheme.value = +Object.keys(val)[0];
+};
+
+const onGenerate = async () => {
+  generatedCreative.value = await useCreativeCreate({ themeId: selectedTheme.value });
 };
 </script>
 

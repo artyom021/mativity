@@ -78,6 +78,11 @@ export const ROUTES: RoutesType = {
     NAME: "audioGenerator",
   },
 
+  AUDIO_GENERATOR_NEW: {
+    PATH: "/audio-generator-new",
+    NAME: "audioGenerator-new",
+  },
+
   PROFILE: {
     PATH: "/profile",
     NAME: "profile",
@@ -96,6 +101,16 @@ export const ROUTES: RoutesType = {
   LOGOUT: {
     PATH: "/logout",
     NAME: "logout",
+  },
+
+  ADMIN_LOGIN: {
+    PATH: "/admin-login",
+    NAME: "admin-login",
+  },
+
+  ADMIN_PANEL: {
+    PATH: "/admin-panel",
+    NAME: "admin-panel",
   },
 };
 

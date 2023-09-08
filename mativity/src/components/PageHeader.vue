@@ -42,15 +42,14 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-
 import StyledIcon from "@/components/customComponents/StyledIcon.vue";
 import LanguagePopup from "@/components/popup/LanguagePopup.vue";
 import { ROUTE_MAPPING } from "@/constants/routes";
 import { HEADER_LINKS } from "@/router/routes";
 import { useAppStore } from "@/store/app/appStore";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
 const route = useRoute();

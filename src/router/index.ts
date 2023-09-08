@@ -38,6 +38,10 @@ router.beforeEach(async (to) => {
       detail: lang.success.logout,
     });
   }
+
+  if (to.path === ROUTES.ADMIN_PANEL.PATH && user.value?.account_type !== "admin") {
+    await router.replace(ROUTES.ADMIN_LOGIN.PATH);
+  }
 });
 
 export default router;

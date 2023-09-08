@@ -28,6 +28,7 @@ defineProps({
   align-items: center;
   z-index: 999;
   background: rgba(0, 0, 0, 0.6);
+  height: 1200px;
 
   &_fixed {
     position: fixed;

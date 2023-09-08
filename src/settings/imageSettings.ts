@@ -1,11 +1,11 @@
 export const styleOptions = [
   {
     title: "Fantasy-art",
-    value: "fantasyArt",
+    value: "fantasy-art",
   },
   {
     title: "3d model",
-    value: "3dModel",
+    value: "3d-model",
   },
   {
     title: "Photographic",
@@ -17,15 +17,15 @@ export const styleOptions = [
   },
   {
     title: "Analog film",
-    value: "analogFilm",
+    value: "analog-film",
   },
   {
     title: "Pixel-art",
-    value: "pixelArt",
+    value: "pixel-art",
   },
   {
     title: "Line-art",
-    value: "lineArt",
+    value: "line-art",
   },
   {
     title: "Anime",
@@ -33,11 +33,11 @@ export const styleOptions = [
   },
   {
     title: "Tile-texture",
-    value: "tileTexture",
+    value: "tile-texture",
   },
   {
     title: "Low-poly",
-    value: "lowPoly",
+    value: "low-poly",
   },
   {
     title: "Cinematic",
@@ -45,10 +45,26 @@ export const styleOptions = [
   },
   {
     title: "Modeling-compound",
-    value: "modelingCompound",
+    value: "modeling-compound",
   },
   {
     title: "Comic-book",
-    value: "comicBook",
+    value: "comic-book",
+  },
+  {
+    title: "Digital Art",
+    value: "digital-art",
+  },
+  {
+    title: "Enhance",
+    value: "enhance",
+  },
+  {
+    title: "Neon Punk",
+    value: "neon-punk",
+  },
+  {
+    title: "Origami",
+    value: "origami",
   },
 ];

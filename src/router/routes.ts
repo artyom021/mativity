@@ -1,12 +1,16 @@
 import { RouteRecordRaw } from "vue-router";
 
 import { ROUTES } from "@/constants/routes";
+import AdminLogin from "@/views/AdminLogin.vue";
+import AdminPanel from "@/views/AdminPanel.vue";
 import AudioGenerator from "@/views/AudioGenerator.vue";
 import AudioService from "@/views/AudioService.vue";
+import BuyNeurons from "@/views/BuyNeurons.vue";
 import CreativeService from "@/views/CreativeService.vue";
 import HomePage from "@/views/HomePage.vue";
 import ImageService from "@/views/ImageService.vue";
 import ImagesGenerator from "@/views/ImagesGenerator.vue";
+import BuyNeuronsService from "@/views/NewBuyNeurons.vue";
 import ParapharsingService from "@/views/ParapharsingService.vue";
 import PoemsService from "@/views/PoemsService.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
@@ -103,14 +107,21 @@ export const routes: Array<RouteRecordRaw> = [
   },
 
   {
-    path: ROUTES.AUDIO_GENERATOR.PATH,
-    name: ROUTES.AUDIO_GENERATOR.NAME,
-    component: AudioGenerator,
+    path: ROUTES.AUDIO_GENERATOR_NEW.PATH,
+    name: ROUTES.AUDIO_GENERATOR_NEW.NAME,
+    component: BuyNeuronsService,
   },
+
   {
     path: ROUTES.PROFILE.PATH,
     name: ROUTES.PROFILE.NAME,
     component: ProfilePage,
+  },
+
+  {
+    path: ROUTES.BUY_NEURONS.PATH,
+    name: ROUTES.BUY_NEURONS.NAME,
+    component: BuyNeurons,
   },
 
   {
@@ -120,14 +131,26 @@ export const routes: Array<RouteRecordRaw> = [
   },
 
   {
-    path: ROUTES.BUY_NEURONS.PATH,
-    name: ROUTES.BUY_NEURONS.NAME,
-    component: HomePage,
+    path: ROUTES.PROFILE.PATH,
+    name: ROUTES.PROFILE.NAME,
+    component: ProfilePage,
   },
 
   {
     path: ROUTES.LOGOUT.PATH,
     name: ROUTES.LOGOUT.NAME,
     component: HomePage,
+  },
+
+  {
+    path: ROUTES.ADMIN_LOGIN.PATH,
+    name: ROUTES.ADMIN_LOGIN.NAME,
+    component: AdminLogin,
+  },
+
+  {
+    path: ROUTES.ADMIN_PANEL.PATH,
+    name: ROUTES.ADMIN_PANEL.NAME,
+    component: AdminPanel,
   },
 ];
