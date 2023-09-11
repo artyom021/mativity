@@ -15,34 +15,100 @@
 
     <div class="poems__input">
       <div class="poems__input-title">Style</div>
-      <Dropdown v-model="selectedStyle" :options="paraphrasingStyles" optionLabel="label" placeholder="Select a City" />
+      <SingleSelect
+        :items="styleOptionsPrepared"
+        :modelValue="selectedStyle"
+        @updateStyle="updateStyle"
+        class="dropdown-poems"
+        optionLabel="label"
+        optionValue="value"
+      />
     </div>
 
     <span class="p-input-icon-right poems__subject-input">
       <i class="pi pi pi-pencil" />
-      <InputText v-model="value2" placeholder="Enter Subject" />
+      <TextArea v-model="textToPeraphrase" placeholder="Enter Text" />
     </span>
+
+    <div v-if="paraphrasedText" class="p-input-icon-right poems__subject-input">
+      <i @click="copyText" class="pi pi pi-copy copy-btn" />
+      <TextArea v-model="paraphrasedText" auto-resize ref="resultText" />
+    </div>
 
     <div class="poems__generation">
       <div class="poems__generation-title">1 Generation</div>
       <div class="poems__generation-value"><img :src="require(`@/assets/svg/curve.svg`)" alt="Price" /> 10</div>
     </div>
 
-    <div class="poems__generate-btn btn-neon">Generate</div>
+    <div @click="onGenerate" class="poems__generate-btn btn-neon">Generate</div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-import Dropdown from "primevue/dropdown";
-import InputText from "primevue/inputtext";
-import { ref } from "vue";
+import TextArea from "primevue/textarea";
+import { computed, onBeforeMount, ref } from "vue";
 
-import { paraphrasingStyles } from "@/settings/textSettings";
+import SingleSelect from "@/components/inputs/SingleSelect.vue";
+import { useParaphraseCreate } from "@/hooks/chatGpt/useParaphraseCreate";
+import { getParaphraseStyles } from "@/hooks/chatGpt/useParaphraseStylesRead";
+import { StyleApi } from "@/hooks/chatGpt/useStylesRead";
+import lang from "@/i18n";
+import { useAppStore } from "@/store/app/appStore";
+import { ToastSeverity } from "@/types/toast";
 import { Style } from "@/views/PoemsService.vue";
 
-const selectedStyle = ref<Style>({ label: "Fable", value: "fable" });
+const appStore = useAppStore();
+const { showToast } = appStore;
+
+onBeforeMount(async () => {
+  styleOptions.value = await getParaphraseStyles();
+});
+
+const textToPeraphrase = ref<string>("");
+const styleOptions = ref<StyleApi[]>([]);
+const selectedStyle = ref(1);
+const paraphrasedText = ref<string | null>();
+const resultText = ref();
+
+const styleOptionsPrepared = computed(() => {
+  if (styleOptions.value.length) {
+    return styleOptions.value.map((style: StyleApi) => {
+      const capitalized = style.style.charAt(0).toUpperCase() + style.style.slice(1);
+      return {
+        label: capitalized,
+        value: style.id,
+      };
+    });
+  } else {
+    return [];
+  }
+});
+
+const updateStyle = (val: number) => {
+  selectedStyle.value = val;
+};
+
+const onGenerate = async () => {
+  const body = {
+    text: textToPeraphrase.value,
+    styleId: selectedStyle.value,
+  };
+
+  paraphrasedText.value = await useParaphraseCreate(body);
+};
+
+const copyText = () => {
+  const text = resultText.value.modelValue;
+  navigator.clipboard.writeText(text);
+
+  showToast({
+    summary: lang.message.copyToClipboard,
+    severity: ToastSeverity.Success,
+    detail: lang.success.textCopied,
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -113,10 +179,10 @@ const selectedStyle = ref<Style>({ label: "Fable", value: "fable" });
   &__subject-input {
     margin-top: 34px;
     width: 100%;
-    height: 74px;
+    height: auto;
     .p-inputtext {
       width: 100%;
-      height: 74px;
+      height: auto;
     }
   }
 

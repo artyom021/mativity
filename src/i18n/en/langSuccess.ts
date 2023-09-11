@@ -9,4 +9,6 @@ export default <Lang>{
   textParaphrased: "Text paraphrased successfully",
   creativeText: "Creative text created successfully",
   imageGenerated: "Image generated successfully",
+  registrationFinished: "Registration finished successfully",
+  textCopied: "Text copied",
 };

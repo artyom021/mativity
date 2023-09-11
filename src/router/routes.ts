@@ -153,4 +153,11 @@ export const routes: Array<RouteRecordRaw> = [
     name: ROUTES.ADMIN_PANEL.NAME,
     component: AdminPanel,
   },
+
+  {
+    path: ROUTES.REGISTRATION.PATH,
+    name: ROUTES.REGISTRATION.NAME,
+    component: HomePage,
+    props: (route) => ({ secret_code: route.query.secret_code }),
+  },
 ];

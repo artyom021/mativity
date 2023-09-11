@@ -25,12 +25,12 @@
       />
     </div>
 
-    <div class="poems__input">
+    <div v-if="showInputs" class="poems__input">
       <div class="poems__input-title">Stanza Size</div>
       <InputNumber v-model="stanzaSize" :max="20" :min="1" class="poems__input-number" inputId="minmax" />
     </div>
 
-    <div class="poems__input">
+    <div v-if="showInputs" class="poems__input">
       <div class="poems__input-title">Stanza Count</div>
       <InputNumber v-model="stanzaCount" :max="20" :min="1" class="poems__input-number" inputId="minmax" />
     </div>
@@ -40,8 +40,9 @@
       <TextArea v-model="subject" placeholder="Enter Subject" />
     </div>
 
-    <div class="poems__subject-input">
-      <TextArea v-if="generatedPoem" v-model="generatedPoem" :disabled="subject.length >= 300" auto-resize />
+    <div v-if="generatedPoem" class="p-input-icon-right poems__subject-input">
+      <i @click="copyText" class="pi pi pi-copy copy-btn" />
+      <TextArea v-model="generatedPoem" :disabled="subject.length >= 300" auto-resize ref="resultText" />
     </div>
 
     <div class="poems__generation">
@@ -65,17 +66,26 @@ import { computed, onBeforeMount, ref } from "vue";
 import SingleSelect from "@/components/inputs/SingleSelect.vue";
 import { StyleApi, getStyles } from "@/hooks/chatGpt/useStylesRead";
 import { useVerseCreate } from "@/hooks/chatGpt/useVerseCreate";
+import lang from "@/i18n";
+import { useAppStore } from "@/store/app/appStore";
+import { ToastSeverity } from "@/types/toast";
 
 export interface Style {
   label: string;
   value: string;
 }
+
+const appStore = useAppStore();
+const { showToast } = appStore;
+
 const subject = ref<string>("");
 const stanzaSize = ref<number>(1);
 const stanzaCount = ref<number>(1);
 
 const styleOptions = ref<StyleApi[]>([]);
 const generatedPoem = ref<string | null>();
+const selectedStyle = ref(1);
+const resultText = ref();
 
 onBeforeMount(async () => {
   styleOptions.value = await getStyles();
@@ -95,8 +105,6 @@ const styleOptionsPrepared = computed(() => {
   }
 });
 
-const selectedStyle = ref(1);
-
 const updateStyle = (val: number) => {
   selectedStyle.value = val;
 };
@@ -110,6 +118,21 @@ const onGenerate = async () => {
   };
 
   generatedPoem.value = await useVerseCreate(body);
+};
+
+const showInputs = computed<boolean>(() => {
+  return selectedStyle.value !== 1 && selectedStyle.value !== 7;
+});
+
+const copyText = () => {
+  const text = resultText.value.modelValue;
+  navigator.clipboard.writeText(text);
+
+  showToast({
+    summary: lang.message.copyToClipboard,
+    severity: ToastSeverity.Success,
+    detail: lang.success.textCopied,
+  });
 };
 </script>
 

@@ -16,4 +16,6 @@ export const API_ROUTES: ApiRoutes = {
   VERSE_GENERATE: "/verses/generate",
   CREATIVE_GENERATE: "/creative/generate",
   IMAGE_CREATE: "/images/generate",
+  REGISTRATION_CONFIRMATION: "/registration-confirm",
+  PAYMENT: "/get-pay-link",
 };

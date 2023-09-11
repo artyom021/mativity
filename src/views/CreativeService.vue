@@ -28,8 +28,9 @@
       </TreeSelect>
     </div>
 
-    <div class="p-input-icon-right poems__subject-input">
-      <TextArea v-if="generatedCreative" v-model="generatedCreative" auto-resize />
+    <div v-if="generatedCreative" class="p-input-icon-right poems__subject-input">
+      <i @click="copyText" class="pi pi pi-copy copy-btn" />
+      <TextArea v-model="generatedCreative" auto-resize ref="resultText" />
     </div>
 
     <div class="poems__generation">
@@ -49,9 +50,16 @@ import TreeSelect from "primevue/treeselect";
 import { ref } from "vue";
 
 import { useCreativeCreate } from "@/hooks/chatGpt/useCreativeCreate";
+import lang from "@/i18n";
+import { useAppStore } from "@/store/app/appStore";
+import { ToastSeverity } from "@/types/toast";
+
+const appStore = useAppStore();
+const { showToast } = appStore;
 
 const selectedTheme = ref<number>(1);
 const generatedCreative = ref<string>();
+const resultText = ref();
 
 const items = [
   {
@@ -78,6 +86,17 @@ const onUpdate = (val: any) => {
 
 const onGenerate = async () => {
   generatedCreative.value = await useCreativeCreate({ themeId: selectedTheme.value });
+};
+
+const copyText = () => {
+  const text = resultText.value.modelValue;
+  navigator.clipboard.writeText(text);
+
+  showToast({
+    summary: lang.message.copyToClipboard,
+    severity: ToastSeverity.Success,
+    detail: lang.success.textCopied,
+  });
 };
 </script>
 

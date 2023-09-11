@@ -2,23 +2,22 @@
   <div class="transaction">
     <h1 class="transaction__title">Transactions</h1>
     <div class="transaction__block-container">
-      <div v-for="transaction in transactions" :key="transaction.description" class="transaction__block">
-        <div class="transaction__block-item">
+      <div v-for="transaction in transactionList" :key="transaction.description" class="transaction__block">
+        <div class="transaction__block-item transaction__description-block">
           <span class="transaction__block-title">Description</span>
-          <span class="transaction__description">{{ transaction.description }}</span>
+          <span class="transaction__description">{{ transaction.service_type }}</span>
         </div>
 
         <div class="transaction__block-item">
           <span class="transaction__block-title">Transaction</span>
-          <span class="transaction__transaction"
-            >{{ transaction.type }}
-            <span class="transaction__transaction-value">{{ transaction.transaction }}</span></span
+          <span class="transaction__transaction">
+            <span class="transaction__transaction-value">{{ transaction.neuron_qnt }} neurons</span></span
           >
         </div>
 
         <div class="transaction__block-item">
           <span class="transaction__block-title">Date of Transaction</span>
-          <span class="transaction__date">{{ transaction.date }}</span>
+          <span class="transaction__date">{{ transaction.created_at.slice(0, 10) }}</span>
         </div>
       </div>
     </div>
@@ -26,48 +25,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { onBeforeMount } from "vue";
 
-import { Transaction } from "@/store/transactions/transactionStore";
+import { getTransaction } from "@/hooks/transactions/useGetTransaction";
+import { useTransactionStore } from "@/store/transactions/transactionStore";
 
-const transactions = ref<Transaction[]>([
-  {
-    description: "test",
-    transaction: "500",
-    type: "purchase",
-    date: "23.08.2023",
-  },
-  {
-    description: "test",
-    transaction: "500",
-    type: "purchase",
-    date: "23.08.2023",
-  },
-  {
-    description: "test",
-    transaction: "500",
-    type: "purchase",
-    date: "23.08.2023",
-  },
-  {
-    description: "test",
-    transaction: "500",
-    type: "purchase",
-    date: "23.08.2023",
-  },
-  {
-    description: "test",
-    transaction: "500",
-    type: "purchase",
-    date: "23.08.2023",
-  },
-  {
-    description: "test",
-    transaction: "500",
-    type: "purchase",
-    date: "23.08.2023",
-  },
-]);
+const userTransactionStore = useTransactionStore();
+const { transactionList } = storeToRefs(userTransactionStore);
+
+onBeforeMount(async () => {
+  await getTransaction();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -90,7 +59,7 @@ const transactions = ref<Transaction[]>([
     border-radius: 8px;
     background-color: #131313;
     width: 80%;
-    height: 80%;
+    max-height: 80%;
     overflow: auto;
   }
 
@@ -113,8 +82,8 @@ const transactions = ref<Transaction[]>([
 
   &__block {
     display: flex;
-    justify-content: center;
-    gap: 160px;
+    justify-content: space-between;
+    //gap: 120px;
   }
 
   &__block-item {
@@ -133,10 +102,13 @@ const transactions = ref<Transaction[]>([
     color: #d53f8c;
   }
 
-  &__description,
   &__transaction,
   &__date {
     text-align: center;
+  }
+
+  &__description-block {
+    flex-basis: 260px;
   }
 }
 </style>

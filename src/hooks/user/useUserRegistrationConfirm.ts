@@ -3,21 +3,21 @@ import { isArray } from "lodash";
 
 import { RequestMethod, useApi } from "@/api";
 import { API_ROUTES } from "@/api/apiRoutes";
-import { getBalance } from "@/hooks/user/useGetBalance";
+import { MAXTIVITY_TOKEN_KEY } from "@/hooks/user/useUserRead";
 import lang from "@/i18n";
 import { useAppStore } from "@/store/app/appStore";
 import { HookConfig } from "@/types/api";
 import { ToastSeverity } from "@/types/toast";
 
-type CreativeBody = {
-  themeId: number;
+export type UserRegistrationConfirm = {
+  secret_code: string;
 };
 
-export const useCreativeCreate = async <R>(body: CreativeBody, config?: HookConfig): Promise<string> => {
+export const useRegistrationConfirm = async <R>(body: UserRegistrationConfirm, config?: HookConfig): Promise<void> => {
   const appStore = useAppStore();
   const { updateIsLoading, showToast } = appStore;
-  const { request, data } = useApi<R | null>({
-    path: API_ROUTES.CREATIVE_GENERATE as string,
+  const { request, data } = useApi<R>({
+    path: API_ROUTES.REGISTRATION_CONFIRMATION as string,
     method: RequestMethod.Post,
     body,
   });
@@ -30,24 +30,19 @@ export const useCreativeCreate = async <R>(body: CreativeBody, config?: HookConf
     await request();
 
     showToast({
-      summary: lang.message.Creative,
+      summary: lang.message.registrationConfirmation,
       severity: ToastSeverity.Success,
-      detail: lang.success.creativeText,
+      detail: lang.success.registrationFinished,
     });
-
-    if (data) {
-      await getBalance();
-      return data.value.data;
-    }
+    localStorage.setItem(MAXTIVITY_TOKEN_KEY, data.value.token);
   } catch (e) {
     let errorMessage = lang.error.somethingWentWrong;
-
     if (e instanceof AxiosError) {
       errorMessage = isArray(e.response?.data.message) ? e.response?.data.message[0] : e.response?.data.message;
     }
-
+    console.log(e);
     showToast({
-      summary: lang.message.Creative,
+      summary: lang.message.registration,
       severity: ToastSeverity.Error,
       detail: errorMessage,
     });
@@ -56,5 +51,4 @@ export const useCreativeCreate = async <R>(body: CreativeBody, config?: HookConf
       updateIsLoading(false);
     }
   }
-  return "";
 };

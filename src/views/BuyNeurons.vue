@@ -13,7 +13,10 @@
               <InputNumber
                 v-model:model-value.number="neuronsComputed"
                 :max="500"
+                :maxFractionDigits="1"
                 :min="5"
+                :minFractionDigits="1"
+                :step="0.01"
                 class="w-full neuron__buy-slider-input token"
                 mode="decimal"
                 prefix="&euro;      "
@@ -66,7 +69,7 @@
         </div>
       </div>
       <div>
-        <div class="neuron__confirm-btn">Confirm</div>
+        <div @click="onBuyNeurons" class="neuron__confirm-btn">Confirm</div>
         <div class="neuron__checkbox">
           <Checkbox v-model="confirmation" binary />
           <div class="neuron__checkbox-title">
@@ -86,6 +89,7 @@ import { computed, ref } from "vue";
 
 import ChangeIcon from "@/components/icons/ChangeIcon.vue";
 import SliderInput from "@/components/inputs/SliderInput.vue";
+import { useUserPayment } from "@/hooks/user/usePayment";
 import { useBuyNeuronsStore } from "@/store/neurons/useBuyNeurons";
 
 const buyNeuronsStore = useBuyNeuronsStore();
@@ -124,6 +128,14 @@ const neuronsWithCurrency = computed<number>({
     updateInputNeurons(neurons);
   },
 });
+
+const onBuyNeurons = async () => {
+  const res = await useUserPayment({ amount_count: inputNeurons.value * 10 });
+
+  if (res) {
+    window.location.href = res;
+  }
+};
 </script>
 
 <style lang="scss" scoped>

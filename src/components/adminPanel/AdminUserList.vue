@@ -1,6 +1,13 @@
 <template>
   <div class="card">
-    <DataTable :value="usersList" tableStyle="min-width: 50rem">
+    <DataTable
+      :rows="5"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      :value="usersList"
+      @update:rows="changeRowCount"
+      paginator
+      tableStyle="min-width: 50rem"
+    >
       <Column
         v-for="column of userListColumns"
         :field="column.fieldName"
@@ -27,6 +34,11 @@ const usersList = ref<UserListItem[]>([]);
 onBeforeMount(async () => {
   usersList.value = await getUsers();
 });
+
+const changeRowCount = (value: number) => {
+  console.log(value);
+  setTimeout(() => window.scrollTo({ top: 200, behavior: "smooth" }), 200);
+};
 </script>
 
 <style lang="scss">

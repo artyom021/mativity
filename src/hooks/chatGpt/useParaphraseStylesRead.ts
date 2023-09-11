@@ -21,7 +21,7 @@ export const getParaphraseStyles = async (): Promise<any[]> => {
     await request();
 
     if (data.value) {
-      return data.value;
+      return data.value.data;
     }
   } catch (e) {
     let errorMessage = lang.error.somethingWentWrong;

@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { ROUTES } from "@/constants/routes";
 import { useUserLogout } from "@/hooks/user/useUserLogout";
 import { getUserInfo } from "@/hooks/user/useUserRead";
+import { useRegistrationConfirm } from "@/hooks/user/useUserRegistrationConfirm";
 import lang from "@/i18n";
 import { routes } from "@/router/routes";
 import { useAppStore } from "@/store/app/appStore";
@@ -37,6 +38,12 @@ router.beforeEach(async (to) => {
       severity: ToastSeverity.Success,
       detail: lang.success.logout,
     });
+  }
+
+  if (to.path === ROUTES.REGISTRATION.PATH) {
+    if (to.query.secret_code) {
+      await useRegistrationConfirm({ secret_code: to.query.secret_code as string });
+    }
   }
 
   if (to.path === ROUTES.ADMIN_PANEL.PATH && user.value?.account_type !== "admin") {

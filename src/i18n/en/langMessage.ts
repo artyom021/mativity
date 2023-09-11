@@ -12,4 +12,6 @@ export default <Lang>{
   paraphrase: "Paraphrase",
   Creative: "Creative",
   Image: "Image",
+  registrationConfirmation: "Registration Confirmation",
+  copyToClipboard: "Copy to Clipboard",
 };

@@ -13,13 +13,12 @@
         <AccordeonDropdown v-model="selectedLanguage" :items="languages" placeholder="Language" />
         <AccordeonDropdown v-model="selectedDialect" :items="dialects" placeholder="Dialect" />
         <AccordeonDropdown v-model="selectedGender" :items="gender" placeholder="Gender" />
-        <AccordeonDropdown v-model="selectedVoicestyle" :items="voiceStyle" placeholder="Voice Style" />
+        <!--        <AccordeonDropdown v-model="selectedVoicestyle" :items="voiceStyle" placeholder="Voice Style" />-->
       </div>
 
       <div class="voice-selection__voices">
         <div v-for="voice in voices" :key="voice.label" class="voice-selection__voice-item">
-          <SoundIcon class="voice-selection__speaker" />
-          {{ voice.label }}
+          <AudioPlayerCompact :label="voice.label" />
         </div>
       </div>
 
@@ -33,6 +32,7 @@
 import Dialog from "primevue/dialog";
 import { computed, ref } from "vue";
 
+import AudioPlayerCompact from "@/components/customComponents/audio/AudioPlayerCompact.vue";
 import SoundIcon from "@/components/icons/speakerIcon.vue";
 import AccordeonDropdown from "@/components/inputs/AccordeonDropdown.vue";
 import { dialects, gender, languages, voiceStyle, voices } from "@/settings/voiceSettings";

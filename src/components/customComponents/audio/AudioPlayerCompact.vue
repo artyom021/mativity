@@ -14,10 +14,11 @@
       ref="waveformRef"
       v-bind="waveOptions"
     />
-    <SoundIcon class="voice-selection__speaker" />
   </div>
   <div id="seek">
     <div class="controls-container">
+      <SoundIcon class="voice-selection__speaker" />
+
       <button
         :disabled="!ready"
         :title="playing ? 'Pause' : 'Play'"
@@ -265,7 +266,7 @@ $player-timeline-color: $player-border-color;
   margin: 0;
   border: none;
   border-radius: 50%;
-  background-color: #8e0c0b;
+  background-color: black;
   padding: 0.4em;
   color: white;
   line-height: 0;

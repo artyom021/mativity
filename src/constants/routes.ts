@@ -112,6 +112,11 @@ export const ROUTES: RoutesType = {
     PATH: "/admin-panel",
     NAME: "admin-panel",
   },
+
+  REGISTRATION: {
+    PATH: "/registration",
+    NAME: "registration",
+  },
 };
 
 export const ROUTE_MAPPING: { [key: string]: string } = {

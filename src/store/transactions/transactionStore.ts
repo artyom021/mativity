@@ -2,10 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export interface Transaction {
-  description: string;
-  transaction: string;
-  date: string;
-  type: string;
+  neuron_qnt: number;
+  created_at: string;
+  service_type: string;
 }
 
 export const useTransactionStore = defineStore("transactionStore", () => {

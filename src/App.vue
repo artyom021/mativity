@@ -85,148 +85,6 @@ body {
 .app-overlay--show {
   visibility: visible;
 }
-//
-//.fade-enter-active,
-//.fade-leave-active {
-//  transition: opacity 0.2s ease-in-out;
-//}
-//
-//.fade-enter-from,
-//.fade-leave-to {
-//  opacity: 0;
-//}
-//
-//.btn-neon:hover {
-//  transition: all 0.2s ease-in-out;
-//  box-shadow: $primary-300 0px 0px 22px;
-//  border: 3px solid $primary-300;
-//  padding-left: 2px;
-//}
-//
-//.p-inputtext:enabled:focus {
-//  box-shadow: 0 0 0 0.2rem $primary-300 !important;
-//  border-color: $primary-400 !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-panel:last-child .p-panelmenu-header:not(.p-highlight) .p-panelmenu-header-content {
-//  background: rgb(0, 47, 111) !important;
-//  background: linear-gradient(
-//    106deg,
-//    rgba(0, 47, 111, 1) 0%,
-//    rgba(13, 129, 136, 1) 49%,
-//    rgba(0, 47, 111, 1) 100%
-//  ) !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content {
-//  background: rgb(0, 47, 111) !important;
-//  background: linear-gradient(
-//    106deg,
-//    rgba(0, 47, 111, 1) 0%,
-//    rgba(13, 129, 136, 1) 49%,
-//    rgba(0, 47, 111, 1) 100%
-//  ) !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action {
-//  color: white !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action {
-//  justify-content: space-between;
-//}
-//
-//.p-panelmenu .p-panelmenu-header:not(.p-disabled):focus .p-panelmenu-header-content {
-//  outline: 0 none;
-//  outline-offset: 0;
-//  box-shadow: inset 0 0 0 0.2rem $primary-200 !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content .p-menuitem-link {
-//  justify-content: space-between;
-//}
-//
-//.p-panelmenu .p-panelmenu-content .p-panelmenu-root-list {
-//  background: black !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-content {
-//  background: black !important;
-//}
-//
-//.p-panelmenu
-//  .p-panelmenu-content
-//  .p-menuitem:not(.p-highlight):not(.p-disabled)
-//  > .p-menuitem-content:hover
-//  .p-menuitem-link
-//  .p-menuitem-text {
-//  color: white !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
-//  background: black !important;
-//  color: white !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content:hover {
-//  color: $primary-200 !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
-//  background-color: black !important;
-//}
-//
-//.p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-//  color: white !important;
-//}
-//
-//.p-panelmenu
-//  .p-panelmenu-content
-//  .p-menuitem:not(.p-highlight):not(.p-disabled)
-//  > .p-menuitem-content:hover
-//  .p-menuitem-link
-//  .p-menuitem-text {
-//  color: $primary-200 !important;
-//}
-//
-//.p-inputtext {
-//  color: #d8d8d8 !important;
-//  font-weight: 600 !important;
-//  font-size: 30px !important;
-//}
-//
-//.p-dropdown-panel .p-dropdown-items {
-//  padding: 0.1rem 0 !important;
-//}
-//
-//.p-inputtext {
-//  color: #000 !important;
-//}
-//
-//.p-toast .p-toast-message .p-toast-icon-close:focus {
-//  box-shadow: unset !important;
-//}
-//
-//.p-button {
-//  background-color: unset !important;
-//}
-//
-//.p-checkbox .p-checkbox-box.p-highlight {
-//  border-color: $primary-200 !important;
-//  background: $primary-200 !important;
-//}
-//
-//.p-checkbox .p-checkbox-box .p-checkbox-icon {
-//  color: black !important;
-//}
-//
-//.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
-//  border-color: $primary-300;
-//}
-//
-//.p-button:enabled:hover {
-//  border-color: $primary-300 !important;
-//}
 
 .p-inputtext:enabled:focus {
   border-color: $primary-200 !important;
@@ -235,5 +93,11 @@ body {
 .btn-disabled {
   opacity: 0.2;
   pointer-events: none;
+}
+
+.copy-btn {
+  position: absolute !important;
+  top: 30px !important;
+  cursor: pointer;
 }
 </style>
